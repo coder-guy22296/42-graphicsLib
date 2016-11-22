@@ -6,7 +6,7 @@
 /*   By: cyildiri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/21 15:59:14 by cyildiri          #+#    #+#             */
-/*   Updated: 2016/11/21 21:35:15 by cyildiri         ###   ########.fr       */
+/*   Updated: 2016/11/21 21:53:33 by cyildiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,14 +83,14 @@ t_vec2f			*new_vec2f(float x, float y);
 t_vec3f			*new_vec3f(float x, float y, float z);
 t_vec6f			*new_vec6f(t_vec3f pos, t_vec3f rot);
 t_3d_object		*new_3d_object(char	*filename);
-t_3d_object		*new_camera(t_vec6f camera_loc, t_vec3f viewer_loc);
+t_camera		*new_camera(t_vec6f camera_loc, t_vec3f viewer_loc);
 t_scene			*new_scene(void (*projection_method)(struct s_scene));
 t_renderer		*new_renderer(void (*render)(struct s_renderer, t_scene));
 t_vec2i			perspective_projection(t_scene *scene, t_vec3f point);
 t_vec2i			orthographic_projection(t_scene *scene, t_vec3f point);
 t_vec6f			transalate(vec6f *obj_vector, vec3f translation);
 t_vec6f			rotate(vec6f *obj_vector, vec3f rotation);
-t_3d_object		updateVerticies(t_3d_object);
+t_3d_object		updateVerticies(t_3d_object *obj);
 void			drawline(t_renderer renderer, vec2f point_a, vec2f point_b);
 void			drawline3d(t_renderer renderer, vec3f point_a, vec3f point_b);
 void			render3d_object(t_renderer renderer, t_3d_object obj, int mode);
