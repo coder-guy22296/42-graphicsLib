@@ -6,7 +6,7 @@
 /*   By: cyildiri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/21 15:59:14 by cyildiri          #+#    #+#             */
-/*   Updated: 2016/11/21 21:53:33 by cyildiri         ###   ########.fr       */
+/*   Updated: 2016/11/21 22:45:51 by cyildiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,8 @@ t_vec2i			vec2i(int x, int y);
 t_vec2f			vec2f(float x, float y);
 t_vec3f			vec3f(float x, float y, float z);
 t_vec6f 		vec6f(t_vec3f pos, t_vec3f rot);
-t_3d_object		new_camera(t_vec6f camera_loc, t_vec3f viewer_loc);
+t_3d_object		camera(t_vec6f camera_loc, t_vec3f viewer_loc);
+t_scene			scene(void (*projection_method)(struct s_scene));
+t_renderer		renderer(void (*render)(struct s_renderer, t_scene));
 
 #endif
