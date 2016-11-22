@@ -6,9 +6,13 @@
 /*   By: cyildiri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/21 15:59:14 by cyildiri          #+#    #+#             */
-/*   Updated: 2016/11/21 20:45:39 by cyildiri         ###   ########.fr       */
+/*   Updated: 2016/11/21 21:35:15 by cyildiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef LIB_GRAPHICS_H
+# define LIB_GRAPHICS_H
+#include "libft.h"
 
 typedef struct	s_vec2i
 {
@@ -109,3 +113,4 @@ t_vec3f			vec3f(float x, float y, float z);
 t_vec6f 		vec6f(t_vec3f pos, t_vec3f rot);
 t_3d_object		new_camera(t_vec6f camera_loc, t_vec3f viewer_loc);
 
+#endif
