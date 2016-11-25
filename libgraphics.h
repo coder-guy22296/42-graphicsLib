@@ -35,8 +35,8 @@ typedef struct	s_vec3f
 
 typedef struct  s_vec6f
 {
-    t_vec3f     position;
-    t_vec3f     rotation;
+	t_vec3f     position;
+	t_vec3f     rotation;
 }               t_vec6f;
 
 typedef struct	s_3d_object
@@ -52,13 +52,13 @@ typedef struct	s_3d_object
 
 typedef struct  s_camera
 {
-    t_vec6f     cam_loc;
-	t_vec3f		viewer_loc;
+	t_vec6f     loc;
+	t_vec3f		viewer;
 }               t_camera;
 
 typedef struct	s_scene
 {
-    t_vec3f     origin_point;
+	t_vec3f     origin_point;
 	t_camera	*cameras;
 	int			camera_cnt;
 	t_3d_object *objects;
@@ -86,14 +86,16 @@ t_3d_object		*new_3d_object(char	*filename);
 t_camera		*new_camera(t_vec6f camera_loc, t_vec3f viewer_loc);
 t_scene			*new_scene(void (*projection_method)(struct s_scene));
 t_renderer		*new_renderer(void (*render)(struct s_renderer, t_scene));
-t_vec2i			perspective_projection(t_scene *scene, t_vec3f point);
-t_vec2i			orthographic_projection(t_scene *scene, t_vec3f point);
+t_vec2i			perspective_projection(t_scene scene, t_camera cam,
+							t_vec3f point);
+t_vec2i			orthographic_projection(t_scene scene, t_vec3f point);
 t_vec6f			transalate(vec6f *obj_vector, vec3f translation);
 t_vec6f			rotate(vec6f *obj_vector, vec3f rotation);
 t_3d_object		updateVerticies(t_3d_object *obj);
 void			drawline(t_renderer renderer, vec2f point_a, vec2f point_b);
 void			drawline3d(t_renderer renderer, vec3f point_a, vec3f point_b);
-void			render3d_object(t_renderer renderer, t_3d_object obj, int mode);
+void			render3d_object(t_renderer renderer, t_3d_object obj,
+							int mode);
 void			render_scene(t_renderer renderer, t_scene scene);
 void			render_all_scenes(t_renderer renderer);
 void			add_object(t_scene	*scene, t_3d_object *obj);
