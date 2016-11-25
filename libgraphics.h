@@ -45,6 +45,7 @@ typedef struct	s_3d_object
 	int			face_cnt;
 	int			*vertex_ind;
 	t_vec3f		*vertices;
+	int         vertex_cnt;
 	t_vec6f		pos_vector;
 
 	void		(*transform)(struct	s_3d_object obj);
@@ -91,7 +92,7 @@ t_vec2i			perspective_projection(t_scene scene, t_camera cam,
 t_vec2i			orthographic_projection(t_scene scene, t_vec3f point);
 t_vec6f			transalate(vec6f *obj_vector, vec3f translation);
 t_vec6f			rotate(vec6f *obj_vector, vec3f rotation);
-t_3d_object		updateVerticies(t_3d_object *obj);
+t_3d_object		update_verticies(t_3d_object *obj);
 void			drawline(t_renderer renderer, vec2f point_a, vec2f point_b);
 void			drawline3d(t_renderer renderer, vec3f point_a, vec3f point_b);
 void			render3d_object(t_renderer renderer, t_3d_object obj,
