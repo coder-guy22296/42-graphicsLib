@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libgraphics.h"
+
 t_vec6f	rotate(vec6f *obj_vector, vec3f rotation)
 {
 	obj_vector->rotation.x = rotation.x;

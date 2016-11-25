@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libgraphics.h"
+
 t_vec6f	transalate(vec6f *obj_vector, vec3f translation)
 {
 	obj_vector->x += translation.x;
