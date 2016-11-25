@@ -71,9 +71,8 @@ typedef struct	s_scene
 typedef struct	s_renderer
 {
 	void		*mlx;
-	void		*windows;
-	int			window_cnt;
-	t_scene 	*scenes;
+	void		*window;
+	t_scene		*scenes;
 	int			scenes_cnt;
 
 	void		(*render)(struct s_renderer renderer, t_3d_scene scene);
@@ -95,8 +94,7 @@ t_vec6f			rotate(vec6f *obj_vector, vec3f rotation);
 t_3d_object		update_verticies(t_3d_object *obj);
 void			drawline(t_renderer renderer, vec2f point_a, vec2f point_b);
 void			drawline3d(t_renderer renderer, vec3f point_a, vec3f point_b);
-void			render3d_object(t_renderer renderer, t_3d_object obj,
-							int mode);
+void			render3d_object(t_renderer renderer, t_3d_object obj);
 void			render_scene(t_renderer renderer, t_scene scene);
 void			render_all_scenes(t_renderer renderer);
 void			add_object(t_scene *scene, t_3d_object *obj);
@@ -109,7 +107,7 @@ void			add_scene(t_renderer *renderer, t_scene *scene);
 void			rem_scene(t_renderer *renderer, t_scene *scene);
 void			add_window(t_renderer *renderer, int height, int width,
 							char *name);
-void			rem_window(t_renderer *renderer, char *name);
+//void			rem_window(t_renderer *renderer, char *name);
 t_vec2i			vec2i(int x, int y);
 t_vec2f			vec2f(float x, float y);
 t_vec3f			vec3f(float x, float y, float z);
