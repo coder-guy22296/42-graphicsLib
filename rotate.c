@@ -12,8 +12,8 @@
 
 t_vec6f	rotate(vec6f *obj_vector, vec3f rotation)
 {
-    obj_vector->rotation.x = rotation.x;
-    obj_vector->rotation.y = rotation.y;
-    obj_vector->rotation.z = rotation.z;
-    return (*obj_vector);
+	obj_vector->rotation.x = rotation.x;
+	obj_vector->rotation.y = rotation.y;
+	obj_vector->rotation.z = rotation.z;
+	return (*obj_vector);
 }
