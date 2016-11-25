@@ -18,8 +18,8 @@ t_camera	*new_camera(t_vec6f camera_loc, t_vec3f viewer_loc)
 
 	if (!(cam = (t_camera *)ft_memalloc(sizeof(t_camera))))
 		return (NULL);
-	cam->cam_loc = camera_loc;
-	cam->viewer_loc = viewer_loc;
+	cam->loc = camera_loc;
+	cam->viewer = viewer_loc;
 	return (cam);
 }
 
@@ -27,7 +27,7 @@ t_camera	camera(t_vec6f camera_loc, t_vec3f viewer_loc)
 {
 	t_camera cam;
 
-	cam.cam_loc	= camera_loc;
-	cam.viewer_loc = viewer_loc;
+	cam.loc	= camera_loc;
+	cam.viewer = viewer_loc;
 	return (cam);
 }
