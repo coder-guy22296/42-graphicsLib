@@ -93,7 +93,8 @@ t_vec6f			transalate(vec6f *obj_vector, vec3f translation);
 t_vec6f			rotate(vec6f *obj_vector, vec3f rotation);
 t_3d_object		update_verticies(t_3d_object *obj);
 void			drawline(t_renderer renderer, vec2f point_a, vec2f point_b);
-void			drawline3d(t_renderer renderer, vec3f point_a, vec3f point_b);
+void			drawline3d(t_renderer renderer, t_scene scene, vec3f point_a,
+							vec3f point_b);
 void			render3d_object(t_renderer renderer, t_3d_object obj);
 void			render_scene(t_renderer renderer, t_scene scene);
 void			render_all_scenes(t_renderer renderer);
