@@ -60,10 +60,10 @@ typedef struct  s_camera
 typedef struct	s_scene
 {
 	t_vec3f		origin_point;
-	t_camera	*cameras;
-	int			camera_cnt;
-	t_3d_object	*objects;
-	int			object_cnt;
+	t_camera	*camera;//s;
+	//int			camera_cnt;
+	t_list		*objects;
+	//int			object_cnt;
 
 	void		(*projection_method)(struct s_3d_scene scene);
 }				t_scene;
@@ -72,8 +72,8 @@ typedef struct	s_renderer
 {
 	void		*mlx;
 	void		*window;
-	t_scene		*scenes;
-	int			scenes_cnt;
+	t_scene		*scene;//s;
+	//int			scenes_cnt;
 
 	void		(*render)(struct s_renderer renderer, t_3d_scene scene);
 }				t_renderer;
@@ -97,17 +97,17 @@ void			drawline3d(t_renderer renderer, t_scene scene, vec3f point_a,
 							vec3f point_b);
 void			render3d_object(t_renderer renderer, t_3d_object obj);
 void			render_scene(t_renderer renderer, t_scene scene);
-void			render_all_scenes(t_renderer renderer);
+//void			render_all_scenes(t_renderer renderer);
 void			add_object(t_scene *scene, t_3d_object *obj);
 void			rem_object(t_scene *scene, t_3d_object *obj);
-void			add_camera(t_scene *scene, t_vec6f *camera_loc,
-							t_vec6f viewer_loc);
-void			rem_camera(t_scene *scene, t_vec6f *camera_loc,
-							t_vec6f viewer_loc);
-void			add_scene(t_renderer *renderer, t_scene *scene);
-void			rem_scene(t_renderer *renderer, t_scene *scene);
-void			add_window(t_renderer *renderer, int height, int width,
-							char *name);
+//void			add_camera(t_scene *scene, t_vec6f *camera_loc,
+//							t_vec3f viewer_loc);
+//void			rem_camera(t_scene *scene, t_vec6f *camera_loc,
+//							t_vec6f viewer_loc);
+//void			add_scene(t_renderer *renderer, void (*projection_method)(struct s_scene));
+//void			rem_scene(t_renderer *renderer, t_scene *scene);
+//void			add_window(t_renderer *renderer, int height, int width,
+//							char *name);
 //void			rem_window(t_renderer *renderer, char *name);
 t_vec2i			vec2i(int x, int y);
 t_vec2f			vec2f(float x, float y);
