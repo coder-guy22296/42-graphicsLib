@@ -86,6 +86,9 @@ t_3d_object		*new_3d_object(char *filename);
 t_camera		*new_camera(t_vec6f camera_loc, t_vec3f viewer_loc);
 t_scene			*new_scene(void (*projection_method)(struct s_scene));
 t_renderer		*new_renderer(void (*render)(struct s_renderer, t_scene));
+void			del_3d_object(t_3d_object *obj);
+void			del_scene(t_scene *scene);
+void			del_renderer(t_renderer *renderer);
 t_vec2i			perspective_projection(t_scene scene, t_camera cam,
 							t_vec3f point);
 t_vec2i			orthographic_projection(t_scene scene, t_vec3f point);
