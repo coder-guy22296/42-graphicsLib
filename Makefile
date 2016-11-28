@@ -28,11 +28,16 @@ $(NAME): precom
 
 clean:
 	rm -rf $(OFILES)
+	make -C minilibx/ clean
+	make -C libft/ clean
 
 fclean: clean
 	rm -f $(NAME).a
+	make -C minilibx/ clean
+	make -C libft/ fclean
 
 re: fclean all
+	make -C libft/ re
 
 precom:
 	make -C libft/ re
