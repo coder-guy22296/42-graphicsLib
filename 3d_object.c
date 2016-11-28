@@ -12,22 +12,25 @@
 
 #include "libgraphics.h"
 
-t_3d_object	*new_3d_object(char *filename)
+t_3d_object	*new_object3d(char *filename)
 {
 	t_3d_object *obj;
 
 	if (!(obj = (t_3d_object *)ft_memalloc(sizeof(t_3d_object))))
 		return (NULL);
 	//load
+	filename = "";//temp
 
 	return (obj);
 }
-
-t_3d_object	3d_object(char *filename)
+/*
+t_3d_object	object3d(char *filename)
 {
 	t_3d_object obj;
 
 	//load
+	filename = "";//temp
 
 	return (obj);
 }
+*/

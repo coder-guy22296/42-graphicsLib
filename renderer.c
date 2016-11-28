@@ -18,8 +18,8 @@ t_renderer	*new_renderer(void (*render)(struct s_renderer, t_scene))
 
 	if (!(renderer3d = (t_renderer *)ft_memalloc(sizeof(t_renderer))))
 		return (NULL);
-	renderer3d.mlx = mlx_init();
-	renderer3d.render = render;
+	renderer3d->mlx = mlx_init();
+	renderer3d->render = render;
 	return (renderer3d);
 }
 

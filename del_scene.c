@@ -20,7 +20,7 @@ static void	del_wrapper(void *addr, size_t size)
 
 void	del_scene(t_scene *scene)
 {
-	ft_memdel(&(scene->camera));
+	ft_memdel((void **)&(scene->camera));
 	ft_lstdel(&(scene->objects), del_wrapper);
-	ft_memdel(&scene);
+	ft_memdel((void **)&scene);
 }

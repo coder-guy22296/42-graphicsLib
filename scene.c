@@ -12,20 +12,20 @@
 
 #include "libgraphics.h"
 
-t_scene	*new_scene(void (*projection_method)(t_scene))
+t_scene	*new_scene(t_vec2f (*projection)(t_scene scene, t_vec3f point))
 {
 	t_scene *scene3d;
 
-	if (!(scene = (t_scene *)ft_memalloc(sizeof(t_scene))))
+	if (!(scene3d = (t_scene *)ft_memalloc(sizeof(t_scene))))
 		return (NULL);
-	scene->projection_method = projection_method;
+	scene3d->projection_method = projection;
 	return (scene3d);
 }
 
-t_scene scene(void (*projection_method)(t_scene))
+t_scene scene(t_vec2f (*projection)(t_scene scene, t_vec3f point))
 {
 	t_scene scene3d;
 	
-	scene3d.projection_method = projection_method;
-	return (scene3d)
+	scene3d.projection_method = projection;
+	return (scene3d);
 }

@@ -12,7 +12,7 @@
 
 #include "libgraphics.h"
 
-t_vec6f	transalate(vec6f *obj_vector, vec3f translation)
+t_vec3f	translate(t_vec3f *obj_vector, t_vec3f translation)
 {
 	obj_vector->x += translation.x;
 	obj_vector->y += translation.y;

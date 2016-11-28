@@ -14,8 +14,8 @@
 
 void	del_3d_object(t_3d_object *obj)
 {
-	ft_memdel(&(obj->faces_arr));
-	ft_memdel(&(obj->vertex_ind));
-	ft_memdel(&(obj->vertices));
-	ft_memdel(&obj);
+	ft_memdel((void **)&(obj->faces_arr));
+	ft_memdel((void **)&(obj->vertex_ind));
+	ft_memdel((void **)&(obj->vertices));
+	ft_memdel((void **)&obj);
 }

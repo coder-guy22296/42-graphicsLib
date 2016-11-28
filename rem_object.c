@@ -25,7 +25,7 @@ void	rem_object(t_scene *scene, t_3d_object *obj)
 	cur = scene->objects;
 	if (cur)
 	{
-		while (head->next)
+		while (cur->next)
 		{
 			if (ft_memcmp(cur->content, obj, sizeof(t_3d_object)) == 0)
 			{

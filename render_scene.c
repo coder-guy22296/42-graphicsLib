@@ -14,12 +14,16 @@
 
 void	render_scene(t_renderer renderer, t_scene scene)
 {
-	int i;
+	t_list *current;
 
-	i = 0;
-	while (i < scene.object_cnt)
+	current = scene.objects;
+	if (current)
 	{
-		render3d_object(renderer, scene.objects[i]);
-		i++;
+		while (current->next)
+		{
+			render3d_object(renderer, *((t_3d_object *)(current->content)));
+			current = current->next;
+		}
+		render3d_object(renderer, *((t_3d_object *)(current->content)));
 	}
 }

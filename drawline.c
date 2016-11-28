@@ -10,9 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <math.h>
 #include "libgraphics.h"
 
-void	drawline(t_renderer renderer, vec2f point_a, vec2f point_b)
+void	drawline(t_renderer renderer, t_vec2f point_a, t_vec2f point_b)
 {
 	int		deltax;
 	int		deltay;

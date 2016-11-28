@@ -12,7 +12,8 @@
 
 #ifndef LIB_GRAPHICS_H
 # define LIB_GRAPHICS_H
-#include "libft.h"
+#include "libft/includes/libft.h"
+#include "minilibx/mlx.h"
 
 typedef struct	s_vec2i
 {
@@ -60,22 +61,20 @@ typedef struct  s_camera
 typedef struct	s_scene
 {
 	t_vec3f		origin_point;
-	t_camera	*camera;//s;
-	//int			camera_cnt;
+	t_camera	*camera;
 	t_list		*objects;
-	//int			object_cnt;
 
-	void		(*projection_method)(struct s_3d_scene scene);
+	t_vec2f		(*projection_method)(struct s_scene scene,
+										t_vec3f point);
 }				t_scene;
 
 typedef struct	s_renderer
 {
 	void		*mlx;
 	void		*window;
-	t_scene		*scene;//s;
-	//int			scenes_cnt;
+	t_scene		*scene;
 
-	void		(*render)(struct s_renderer renderer, t_3d_scene scene);
+	void		(*render)(struct s_renderer renderer, t_scene scene);
 }				t_renderer;
 
 t_vec2i			*new_vec2i(int x, int y);
@@ -84,40 +83,28 @@ t_vec3f			*new_vec3f(float x, float y, float z);
 t_vec6f			*new_vec6f(t_vec3f pos, t_vec3f rot);
 t_3d_object		*new_3d_object(char *filename);
 t_camera		*new_camera(t_vec6f camera_loc, t_vec3f viewer_loc);
-t_scene			*new_scene(void (*projection_method)(struct s_scene));
+t_scene			*new_scene(t_vec2f (*projection)(t_scene scene, t_vec3f point));
 t_renderer		*new_renderer(void (*render)(struct s_renderer, t_scene));
 void			del_3d_object(t_3d_object *obj);
 void			del_scene(t_scene *scene);
 void			del_renderer(t_renderer *renderer);
-t_vec2i			perspective_projection(t_scene scene, t_camera cam,
-							t_vec3f point);
-t_vec2i			orthographic_projection(t_scene scene, t_vec3f point);
-t_vec6f			transalate(vec6f *obj_vector, vec3f translation);
-t_vec6f			rotate(vec6f *obj_vector, vec3f rotation);
+t_vec2f			perspective_projection(t_scene scene, t_vec3f point);
+//t_vec2i			orthographic_projection(t_scene scene, t_vec3f point);
+t_vec3f			translate(t_vec3f *obj_pos, t_vec3f translation);
+t_vec6f			rotate(t_vec6f *obj_vector, t_vec3f rotation);
 t_3d_object		update_verticies(t_3d_object *obj);
-void			drawline(t_renderer renderer, vec2f point_a, vec2f point_b);
-void			drawline3d(t_renderer renderer, t_scene scene, vec3f point_a,
-							vec3f point_b);
+void			drawline(t_renderer renderer, t_vec2f point_a, t_vec2f point_b);
+void			drawline3d(t_renderer renderer, t_vec3f point_a, t_vec3f point_b);
 void			render3d_object(t_renderer renderer, t_3d_object obj);
 void			render_scene(t_renderer renderer, t_scene scene);
-//void			render_all_scenes(t_renderer renderer);
 void			add_object(t_scene *scene, t_3d_object *obj);
 void			rem_object(t_scene *scene, t_3d_object *obj);
-//void			add_camera(t_scene *scene, t_vec6f *camera_loc,
-//							t_vec3f viewer_loc);
-//void			rem_camera(t_scene *scene, t_vec6f *camera_loc,
-//							t_vec6f viewer_loc);
-//void			add_scene(t_renderer *renderer, void (*projection_method)(struct s_scene));
-//void			rem_scene(t_renderer *renderer, t_scene *scene);
-//void			add_window(t_renderer *renderer, int height, int width,
-//							char *name);
-//void			rem_window(t_renderer *renderer, char *name);
 t_vec2i			vec2i(int x, int y);
 t_vec2f			vec2f(float x, float y);
 t_vec3f			vec3f(float x, float y, float z);
 t_vec6f			vec6f(t_vec3f pos, t_vec3f rot);
-t_3d_object		camera(t_vec6f camera_loc, t_vec3f viewer_loc);
-t_scene			scene(void (*projection_method)(struct s_scene));
+t_camera		camera(t_vec6f camera_loc, t_vec3f viewer_loc);
+t_scene			scene(t_vec2f (*projection)(t_scene scene, t_vec3f point));
 t_renderer		renderer(void (*render)(struct s_renderer, t_scene));
 
 #endif
