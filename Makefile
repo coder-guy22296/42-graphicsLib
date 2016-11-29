@@ -36,8 +36,8 @@ SRC =   3d_object.c\
 OFILES = $(SRC:.c=.o)
 
 #   Edit path to library
-LIBFT = libft/
-MLX = minilibx/
+LIBFT = ../libft/
+MLX = ../minilibx/
 
 all: $(NAME)
 
