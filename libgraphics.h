@@ -12,8 +12,8 @@
 
 #ifndef LIB_GRAPHICS_H
 # define LIB_GRAPHICS_H
-#include "libft/includes/libft.h"
-#include "minilibx/mlx.h"
+#include "libft.h"
+#include "mlx.h"
 
 typedef struct	s_vec2i
 {
