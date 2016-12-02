@@ -11,6 +11,9 @@
 /* ************************************************************************** */
 
 #include "libgraphics.h"
+#include <stdio.h>
+#include <stdlib.h>
+
 
 void	render_scene(t_renderer renderer, t_scene scene)
 {
@@ -19,6 +22,7 @@ void	render_scene(t_renderer renderer, t_scene scene)
 	current = scene.objects;
 	if (current)
 	{
+
 		while (current->next)
 		{
 			render3d_object(renderer, *((t_3d_object *)(current->content)));

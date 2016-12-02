@@ -23,10 +23,10 @@ t_vec2f	perspective_projection(t_scene scene, t_vec3f point)
 
 	cam = *(scene.camera);
 	//align points to world origin_point
-	point.x += scene.origin_point.x;
-	point.y += scene.origin_point.y;
-	point.z += scene.origin_point.z;
-	//printf("World Coords        (%d,%d,%d)\n", point.x, point.y, point.z);
+	//point.x += scene.origin_point.x;
+	//point.y += scene.origin_point.y;
+	//point.z += scene.origin_point.z;
+	//printf("World Coords        (%f,%f,%f)\n", point.x, point.y, point.z);
 
 	//camera transform
 	new_point.x = cos(cam.loc.rotation.y) * (sin(cam.loc.rotation.z)
@@ -56,11 +56,11 @@ t_vec2f	perspective_projection(t_scene scene, t_vec3f point)
 	// normalization + screen spacing
 	normalized_points.x = (projection.x + 1)/2;
 	normalized_points.y = (1 - projection.y)/2;
-	//printf("NDC         (%f,%f)\n", normalized_points.x, normalized_points.y);
+	//printf("NDC                 (%f,%f)\n", normalized_points.x, normalized_points.y);
 
 	// rasterization
 	rasterized_points.x = (int)(normalized_points.x * 1000);
 	rasterized_points.y = (int)(normalized_points.y * 1000);
-	//printf("Rasterized Coords   (%d,%d)\n", rasterized_points.x, rasterized_points.y);
+	//printf("Rasterized Coords   (%f,%f)\n", rasterized_points.x, rasterized_points.y);
 	return (rasterized_points);
 }

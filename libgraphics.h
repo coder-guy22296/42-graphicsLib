@@ -14,6 +14,9 @@
 # define LIB_GRAPHICS_H
 #include "libft.h"
 #include "mlx.h"
+#include <math.h>
+
+#include <stdio.h> ///REMOVE
 
 typedef struct	s_vec2i
 {
@@ -90,8 +93,8 @@ void			del_scene(t_scene *scene);
 void			del_renderer(t_renderer *renderer);
 t_vec2f			perspective_projection(t_scene scene, t_vec3f point);
 //t_vec2i			orthographic_projection(t_scene scene, t_vec3f point);
-t_vec3f			translate(t_vec3f *obj_pos, t_vec3f translation);
-t_vec6f			rotate(t_vec6f *obj_vector, t_vec3f rotation);
+void			translate(t_3d_object *obj, t_vec3f translation);
+void			rotate(t_3d_object *obj, t_vec3f rotation);
 t_3d_object		update_verticies(t_3d_object *obj);
 void			drawline(t_renderer renderer, t_vec2f point_a, t_vec2f point_b);
 void			drawline3d(t_renderer renderer, t_vec3f point_a, t_vec3f point_b);

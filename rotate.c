@@ -12,10 +12,25 @@
 
 #include "libgraphics.h"
 
-t_vec6f	rotate(t_vec6f *obj_vector, t_vec3f rotation)
+void	rotate(t_3d_object *obj, t_vec3f rotation)
 {
-	obj_vector->rotation.x = rotation.x;
-	obj_vector->rotation.y = rotation.y;
-	obj_vector->rotation.z = rotation.z;
-	return (*obj_vector);
+	int		index;
+
+	index = 0;
+	while (index < obj->vertex_cnt)
+	{
+		// rotate along x axis
+		obj->vertices[index].y = obj->vertices[index].y * cos(rotation.x);
+		obj->vertices[index].z = obj->vertices[index].y * sin(rotation.x);
+		// rotate along y axis
+		obj->vertices[index].x = obj->vertices[index].x * cos(rotation.y);
+		obj->vertices[index].z = obj->vertices[index].x * sin(rotation.y);
+		// rotate along z axis
+		obj->vertices[index].x = obj->vertices[index].x * cos(rotation.z);
+		obj->vertices[index].y = obj->vertices[index].x * sin(rotation.z);
+		index++;
+	}
+	obj->pos_vector.rotation.x += rotation.x;
+	obj->pos_vector.rotation.y += rotation.y;
+	obj->pos_vector.rotation.z += rotation.z;
 }

@@ -12,10 +12,19 @@
 
 #include "libgraphics.h"
 
-t_vec3f	translate(t_vec3f *obj_vector, t_vec3f translation)
+void	translate(t_3d_object *obj, t_vec3f translation)
 {
-	obj_vector->x += translation.x;
-	obj_vector->y += translation.y;
-	obj_vector->z += translation.z;
-	return (*obj_vector);
+	int		index;
+
+	index = 0;
+	while (index < obj->vertex_cnt)
+	{
+		obj->vertices[index].x += translation.x;
+		obj->vertices[index].y += translation.y;
+		obj->vertices[index].z += translation.z;
+		index++;
+	}
+	obj->pos_vector.position.x += translation.x;
+	obj->pos_vector.position.y += translation.y;
+	obj->pos_vector.position.z += translation.z;
 }

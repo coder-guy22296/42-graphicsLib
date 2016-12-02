@@ -33,8 +33,8 @@ void	render3d_object(t_renderer renderer, t_3d_object obj)
 				next_vertex = cur_vertex + 1;
 			else
 				next_vertex = 0;
-			vert1 = translate(&(obj.vertices[face_vertices[cur_vertex]]), obj.pos_vector.position);
-			vert2 = translate(&(obj.vertices[face_vertices[next_vertex]]), obj.pos_vector.position);
+			vert1 = obj.vertices[face_vertices[cur_vertex]];
+			vert2 = obj.vertices[face_vertices[next_vertex]];
 			drawline3d(renderer, vert1, vert2);
 			cur_vertex++;
 		}
