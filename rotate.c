@@ -19,15 +19,43 @@ void	rotate(t_3d_object *obj, t_vec3f rotation)
 	index = 0;
 	while (index < obj->vertex_cnt)
 	{
-		// rotate along x axis
-		obj->vertices[index].y = obj->vertices[index].y * cos(rotation.x);
-		obj->vertices[index].z = obj->vertices[index].y * sin(rotation.x);
-		// rotate along y axis
-		obj->vertices[index].x = obj->vertices[index].x * cos(rotation.y);
-		obj->vertices[index].z = obj->vertices[index].x * sin(rotation.y);
-		// rotate along z axis
-		obj->vertices[index].x = obj->vertices[index].x * cos(rotation.z);
-		obj->vertices[index].y = obj->vertices[index].x * sin(rotation.z);
+		float sin_t;
+		float cos_t;
+		t_vec3f original;
+		t_vec3f *new_point;
+
+		original = obj->vertices[index];
+		new_point = &obj->vertices[index];
+		printf("rotating from: (%f,%f,%f)\n", obj->vertices[index].x,obj->vertices[index].y,obj->vertices[index].z);
+		if (rotation.x)
+		{
+			sin_t = sin(rotation.x);
+			cos_t = cos(rotation.x);
+			// rotate along x axis
+			new_point->y = original.y * cos_t - original.z * sin_t;
+			new_point->z = original.z * cos_t + original.y * sin_t;
+		}
+		original = obj->vertices[index];
+		new_point = &obj->vertices[index];
+		if (rotation.y)
+		{
+			sin_t = sin(rotation.y);
+			cos_t = cos(rotation.y);
+			// rotate along y axis
+			new_point->x = original.x * cos_t - original.z * sin_t;
+			new_point->z = original.z * cos_t + original.x * sin_t;
+		}
+		original = obj->vertices[index];
+		new_point = &obj->vertices[index];
+		if (rotation.z)
+		{
+			sin_t = sin(rotation.z);
+			cos_t = cos(rotation.z);
+			// rotate along z axis
+			new_point->x = original.x * cos_t - original.y * sin_t;
+			new_point->y = original.y * cos_t + original.x * sin_t;
+		}
+		printf("rotated to: (%f,%f,%f)\n", obj->vertices[index].x,obj->vertices[index].y,obj->vertices[index].z);
 		index++;
 	}
 	obj->pos_vector.rotation.x += rotation.x;
