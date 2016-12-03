@@ -26,7 +26,7 @@ SRC =   3d_object.c\
 		renderer.c\
 		rotate.c\
 		scene.c\
-		translate.c\
+		translate_point.c\
 		update_verticies.c\
 		vec2f.c\
 		vec2i.c\

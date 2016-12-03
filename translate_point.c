@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   translate.c                                        :+:      :+:    :+:   */
+/*   translate_point.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cyildiri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,19 +12,12 @@
 
 #include "libgraphics.h"
 
-void	translate(t_3d_object *obj, t_vec3f translation)
+t_vec3f	translate_point(t_vec3f original, t_vec3f translation)
 {
-	int		index;
+	t_vec3f translated_point;
 
-	index = 0;
-	while (index < obj->vertex_cnt)
-	{
-		obj->vertices[index].x += translation.x;
-		obj->vertices[index].y += translation.y;
-		obj->vertices[index].z += translation.z;
-		index++;
-	}
-	obj->pos_vector.position.x += translation.x;
-	obj->pos_vector.position.y += translation.y;
-	obj->pos_vector.position.z += translation.z;
+	translated_point.x = original.x + translation.x;
+	translated_point.y = original.y + translation.y;
+	translated_point.z = original.z + translation.z;
+	return (translated_point);
 }
