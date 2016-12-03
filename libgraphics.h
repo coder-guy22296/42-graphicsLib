@@ -95,7 +95,7 @@ t_vec2f			perspective_projection(t_scene scene, t_vec3f point);
 //t_vec2i			orthographic_projection(t_scene scene, t_vec3f point);
 t_vec3f			translate_point(t_vec3f original, t_vec3f translation);
 //void			translate(t_3d_object *obj, t_vec3f translation);
-void			rotate(t_3d_object *obj, t_vec3f rotation);
+void			rotate_object(t_3d_object *obj, t_vec3f rotation);
 t_3d_object		update_verticies(t_3d_object *obj);
 void			drawline(t_renderer renderer, t_vec2f point_a, t_vec2f point_b);
 void			drawline3d(t_renderer renderer, t_vec3f point_a, t_vec3f point_b);
