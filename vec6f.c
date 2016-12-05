@@ -23,11 +23,11 @@ t_vec6f	*new_vec6f(t_vec3f pos, t_vec3f rot)
 	return (pos_rot);
 }
 
-t_vec6f vec6f(t_vec3f pos, t_vec3f rot)
+t_vec6f	vec6f(t_vec3f pos, t_vec3f rot)
 {
 	t_vec6f pos_rot;
 
-    pos_rot.position = pos;
-    pos_rot.rotation = rot;
+	pos_rot.position = pos;
+	pos_rot.rotation = rot;
 	return (pos_rot);
 }

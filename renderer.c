@@ -25,9 +25,9 @@ t_renderer	*new_renderer(void (*render)(struct s_renderer, t_scene))
 
 t_renderer	renderer(void (*render)(struct s_renderer, t_scene))
 {
-    t_renderer	renderer3d;
+	t_renderer	renderer3d;
 
-    renderer3d.mlx = mlx_init();
-    renderer3d.render = render;
-    return (renderer3d);
+	renderer3d.mlx = mlx_init();
+	renderer3d.render = render;
+	return (renderer3d);
 }

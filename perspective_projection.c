@@ -13,54 +13,59 @@
 #include <math.h>
 #include "libgraphics.h"
 
-t_vec2f	perspective_projection(t_scene scene, t_vec3f point)
+static t_vec3f	camera_transform(t_camera cam, t_vec3f point)
 {
 	t_vec3f new_point;
+
+	new_point.x = (float)(cos(cam.loc.rotation.y) * (sin(cam.loc.rotation.z)
+	* (point.y - cam.loc.position.y) + cos(cam.loc.rotation.z)
+	* (point.x - cam.loc.position.x)) - sin(cam.loc.rotation.y)
+	* (point.z - cam.loc.position.z));
+	new_point.y = (float)(sin(cam.loc.rotation.x) * (cos(cam.loc.rotation.y)
+	* (point.z - cam.loc.position.z) + sin(cam.loc.rotation.y)
+	* (sin(cam.loc.rotation.z) * (point.y - cam.loc.position.y)
+	+ cos(cam.loc.rotation.z) * (point.x - cam.loc.position.x)))
+	+ cos(cam.loc.rotation.x) * (cos(cam.loc.rotation.z)
+	* (point.y - cam.loc.position.y) - sin(cam.loc.rotation.z)
+	* (point.x - cam.loc.position.x)));
+	new_point.z = (float)(cos(cam.loc.rotation.x) * (cos(cam.loc.rotation.y)
+	* (point.z - cam.loc.position.z) + sin(cam.loc.rotation.y)
+	* (sin(cam.loc.rotation.z) * (point.y - cam.loc.position.y)
+	+ cos(cam.loc.rotation.z) * (point.x - cam.loc.position.x)))
+	- sin(cam.loc.rotation.x) * (cos(cam.loc.rotation.z)
+	* (point.y - cam.loc.position.y) - sin(cam.loc.rotation.z)
+	* (point.x - cam.loc.position.x)));
+	return (new_point);
+}
+
+static t_vec2f	project_point(t_camera cam, t_vec3f new_point)
+{
 	t_vec2f projection;
-	t_vec2f normalized_points;
-	t_vec2f rasterized_points;
-	t_camera cam;
+
+	projection.x = (float)(((cam.viewer.z / fabs(new_point.z))
+							* new_point.x) - cam.viewer.x);
+	projection.y = (float)(((cam.viewer.z / fabs(new_point.z))
+							* new_point.y) - cam.viewer.y);
+	return (projection);
+}
+
+t_vec2f			perspective_projection(t_scene scene, t_vec3f point)
+{
+	t_vec3f		new_point;
+	t_vec2f		projection;
+	t_vec2f		normalized_points;
+	t_vec2f		rasterized_points;
+	t_camera	cam;
 
 	cam = *(scene.camera);
-	//align points to world origin_point
 	point.x += scene.origin_point.x;
 	point.y += scene.origin_point.y;
 	point.z += scene.origin_point.z;
-	//printf("World Coords        (%f,%f,%f)\n", point.x, point.y, point.z);
-
-	//camera transform
-	new_point.x = cos(cam.loc.rotation.y) * (sin(cam.loc.rotation.z)
-	* (point.y-cam.loc.position.y) + cos(cam.loc.rotation.z) * (point.x-cam.loc.position.x))
-	- sin(cam.loc.rotation.y) * (point.z-cam.loc.position.z);
-
-	new_point.y = sin(cam.loc.rotation.x) * (cos(cam.loc.rotation.y)
-	* (point.z-cam.loc.position.z) + sin(cam.loc.rotation.y) * (sin(cam.loc.rotation.z)
-	* (point.y-cam.loc.position.y) + cos(cam.loc.rotation.z) * (point.x-cam.loc.position.x)))
-	+ cos(cam.loc.rotation.x) * (cos(cam.loc.rotation.z) * (point.y-cam.loc.position.y)
-	- sin(cam.loc.rotation.z) * (point.x-cam.loc.position.x));
-
-	new_point.z = cos(cam.loc.rotation.x) * (cos(cam.loc.rotation.y)
-	* (point.z-cam.loc.position.z) + sin(cam.loc.rotation.y) * (sin(cam.loc.rotation.z)
-	* (point.y-cam.loc.position.y) + cos(cam.loc.rotation.z) * (point.x-cam.loc.position.x)))
-	- sin(cam.loc.rotation.x) * (cos(cam.loc.rotation.z) * (point.y-cam.loc.position.y)
-	- sin(cam.loc.rotation.z) * (point.x-cam.loc.position.x));
-	//printf("Camera Coords       (%f,%f,%f)\n", new_point.x, new_point.y, new_point.z);
-
-	// projection
-	projection.x = (double)((((double)cam.viewer.z / fabs((double)new_point.z))
-	* (double)new_point.x) - (double)cam.viewer.x);
-	projection.y = (double)((((double)cam.viewer.z / fabs((double)new_point.z))
-	* (double)new_point.y) - (double)cam.viewer.y);
-	//printf("Canvas Coords       (%f,%f)\n", projection.x, projection.y);
-
-	// normalization + screen spacing
-	normalized_points.x = (projection.x + 1)/2;
-	normalized_points.y = (1 - projection.y)/2;
-	//printf("NDC                 (%f,%f)\n", normalized_points.x, normalized_points.y);
-
-	// rasterization
+	new_point = camera_transform(cam, point);
+	projection = project_point(cam, new_point);
+	normalized_points.x = (projection.x + 1) / 2;
+	normalized_points.y = (1 - projection.y) / 2;
 	rasterized_points.x = (int)(normalized_points.x * 1000);
 	rasterized_points.y = (int)(normalized_points.y * 1000);
-	//printf("Rasterized Coords   (%f,%f)\n", rasterized_points.x, rasterized_points.y);
 	return (rasterized_points);
 }

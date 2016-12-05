@@ -19,6 +19,5 @@ void	drawline3d(t_renderer renderer, t_vec3f point_a, t_vec3f point_b)
 
 	point1 = renderer.scene->projection_method(*renderer.scene, point_a);
 	point2 = renderer.scene->projection_method(*renderer.scene, point_b);
-	//clipping
 	drawline(renderer, point1, point2);
 }

@@ -27,7 +27,7 @@ t_camera	camera(t_vec6f camera_loc, t_vec3f viewer_loc)
 {
 	t_camera cam;
 
-	cam.loc	= camera_loc;
+	cam.loc = camera_loc;
 	cam.viewer = viewer_loc;
 	return (cam);
 }

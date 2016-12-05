@@ -10,13 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIB_GRAPHICS_H
-# define LIB_GRAPHICS_H
-#include "libft.h"
-#include "mlx.h"
-#include <math.h>
+#ifndef LIBGRAPHICS_H
+# define LIBGRAPHICS_H
 
-#include <stdio.h> ///REMOVE
+# include <math.h>
+# include "libft.h"
+# include "mlx.h"
 
 typedef struct	s_vec2i
 {
@@ -51,11 +50,10 @@ typedef struct	s_3d_object
 	t_vec3f		*vertices;
 	int			vertex_cnt;
 	t_vec6f		pos_vector;
-
 	void		(*transform)(struct	s_3d_object obj);
 }				t_3d_object;
 
-typedef struct  s_camera
+typedef struct	s_camera
 {
 	t_vec6f		loc;
 	t_vec3f		viewer;
@@ -66,7 +64,6 @@ typedef struct	s_scene
 	t_vec3f		origin_point;
 	t_camera	*camera;
 	t_list		*objects;
-
 	t_vec2f		(*projection_method)(struct s_scene scene,
 										t_vec3f point);
 }				t_scene;
@@ -76,6 +73,7 @@ typedef struct	s_renderer
 	void		*mlx;
 	void		*window;
 	t_scene		*scene;
+	t_vec2f		last_click;
 
 	void		(*render)(struct s_renderer renderer, t_scene scene);
 }				t_renderer;
@@ -94,11 +92,10 @@ void			del_renderer(t_renderer *renderer);
 t_vec2f			perspective_projection(t_scene scene, t_vec3f point);
 //t_vec2i			orthographic_projection(t_scene scene, t_vec3f point);
 t_vec3f			translate_point(t_vec3f original, t_vec3f translation);
-//void			translate(t_3d_object *obj, t_vec3f translation);
 void			rotate_object(t_3d_object *obj, t_vec3f rotation);
-t_3d_object		update_verticies(t_3d_object *obj);
 void			drawline(t_renderer renderer, t_vec2f point_a, t_vec2f point_b);
-void			drawline3d(t_renderer renderer, t_vec3f point_a, t_vec3f point_b);
+void			drawline3d(t_renderer renderer, t_vec3f point_a,
+							t_vec3f point_b);
 void			render3d_object(t_renderer renderer, t_3d_object obj);
 void			render_scene(t_renderer renderer, t_scene scene);
 void			add_object(t_scene *scene, t_3d_object *obj);

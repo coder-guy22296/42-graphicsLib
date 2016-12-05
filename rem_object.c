@@ -18,7 +18,7 @@ static void	del_wrapper(void *addr, size_t size)
 	del_3d_object((t_3d_object *)addr);
 }
 
-void	rem_object(t_scene *scene, t_3d_object *obj)
+void		rem_object(t_scene *scene, t_3d_object *obj)
 {
 	t_list *cur;
 

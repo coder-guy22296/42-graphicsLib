@@ -30,7 +30,7 @@ void	drawline(t_renderer renderer, t_vec2f point_a, t_vec2f point_b)
 	if (deltax == 0)
 		slope = 0;
 	else
-		slope = (double)deltay/(double)deltax;
+		slope = (double)deltay / (double)deltax;
 	error = -1.0;
 	deltaerr = fabs(slope);
 	xdir = 1;
@@ -45,7 +45,7 @@ void	drawline(t_renderer renderer, t_vec2f point_a, t_vec2f point_b)
 	{
 		if (y == point_a.y)
 		{
-			deltaerr = fabs((double)deltax/(double)deltay);
+			deltaerr = fabs((double)deltax / (double)deltay);
 			error += deltaerr;
 		}
 		mlx_pixel_put(renderer.mlx, renderer.window, x, y, 0x00FF00FF);

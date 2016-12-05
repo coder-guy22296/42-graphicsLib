@@ -14,15 +14,14 @@
 
 void	render3d_object(t_renderer renderer, t_3d_object obj)
 {
-	int cur_face;
-	int cur_vertex;
-	int *face_vertices;
-	int next_vertex;
-	t_vec3f vert1;
-	t_vec3f vert2;
+	int		cur_face;
+	int		cur_vertex;
+	int		*face_vertices;
+	int		next_vertex;
+	t_vec3f	vert1;
+	t_vec3f	vert2;
 
 	cur_face = 0;
-	cur_vertex = 0;
 	face_vertices = obj.vertex_ind;
 	while (cur_face < obj.face_cnt)
 	{
@@ -33,8 +32,10 @@ void	render3d_object(t_renderer renderer, t_3d_object obj)
 				next_vertex = cur_vertex + 1;
 			else
 				next_vertex = 0;
-			vert1 = translate_point(obj.vertices[face_vertices[cur_vertex]], obj.pos_vector.position);
-			vert2 = translate_point(obj.vertices[face_vertices[next_vertex]], obj.pos_vector.position);
+			vert1 = translate_point(obj.vertices[face_vertices[cur_vertex]],
+									obj.pos_vector.position);
+			vert2 = translate_point(obj.vertices[face_vertices[next_vertex]],
+									obj.pos_vector.position);
 			drawline3d(renderer, vert1, vert2);
 			cur_vertex++;
 		}

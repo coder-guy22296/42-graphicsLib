@@ -18,7 +18,7 @@ static void	del_wrapper(void *addr, size_t size)
 	del_3d_object((t_3d_object *)addr);
 }
 
-void	del_scene(t_scene *scene)
+void		del_scene(t_scene *scene)
 {
 	ft_memdel((void **)&(scene->camera));
 	ft_lstdel(&(scene->objects), del_wrapper);

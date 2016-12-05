@@ -11,8 +11,7 @@
 # **************************************************************************** #
 
 NAME = libgraphics
-SRC =   3d_object.c\
-		add_object.c\
+SRC =   add_object.c\
 		camera.c\
 		del_3d_object.c\
 		del_renderer.c\
@@ -60,3 +59,6 @@ re: fclean all
 
 precom:
 	make -C $(LIBFT) re
+
+norm:
+	norminette $(SRC) $(NAME).h

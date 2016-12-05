@@ -14,7 +14,5 @@
 
 void	del_renderer(t_renderer *renderer)
 {
-	//mlx_destroy_window(renderer->mlx, renderer->window);
 	del_scene(renderer->scene);
-	//free(mlx);
 }

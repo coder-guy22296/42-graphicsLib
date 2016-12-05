@@ -22,10 +22,10 @@ t_scene	*new_scene(t_vec2f (*projection)(t_scene scene, t_vec3f point))
 	return (scene3d);
 }
 
-t_scene scene(t_vec2f (*projection)(t_scene scene, t_vec3f point))
+t_scene	scene(t_vec2f (*projection)(t_scene scene, t_vec3f point))
 {
 	t_scene scene3d;
-	
+
 	scene3d.projection_method = projection;
 	return (scene3d);
 }

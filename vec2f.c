@@ -14,7 +14,7 @@
 
 t_vec2f	*new_vec2f(float x, float y)
 {
-    t_vec2f	*point;
+	t_vec2f	*point;
 
 	if (!(point = (t_vec2f *)ft_memalloc(sizeof(t_vec2f))))
 		return (NULL);
