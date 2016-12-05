@@ -23,9 +23,9 @@ t_vec2f	perspective_projection(t_scene scene, t_vec3f point)
 
 	cam = *(scene.camera);
 	//align points to world origin_point
-	//point.x += scene.origin_point.x;
-	//point.y += scene.origin_point.y;
-	//point.z += scene.origin_point.z;
+	point.x += scene.origin_point.x;
+	point.y += scene.origin_point.y;
+	point.z += scene.origin_point.z;
 	//printf("World Coords        (%f,%f,%f)\n", point.x, point.y, point.z);
 
 	//camera transform
