@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//t_vec2i	orthographic_projection(t_scene scene, t_camera cam, t_vec3f point, t_vec3f scale)
+//t_vec2i	orthographic_projection(t_scene scene, t_camera cam, t_vec3fc point, t_vec3fc scale)
 //{
 //    t_point point;
 //    int offset[] = {0, 0, 0};

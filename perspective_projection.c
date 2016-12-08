@@ -13,9 +13,9 @@
 #include <math.h>
 #include "libgraphics.h"
 
-static t_vec3f	camera_transform(t_camera cam, t_vec3f point)
+static t_vec3fc	camera_transform(t_camera cam, t_vec3fc point)
 {
-	t_vec3f new_point;
+	t_vec3fc new_point;
 
 	new_point.x = (float)(cos(cam.loc.rotation.y) * (sin(cam.loc.rotation.z)
 	* (point.y - cam.loc.position.y) + cos(cam.loc.rotation.z)
@@ -38,9 +38,9 @@ static t_vec3f	camera_transform(t_camera cam, t_vec3f point)
 	return (new_point);
 }
 
-static t_vec2f	project_point(t_camera cam, t_vec3f new_point)
+static t_vec2fc	project_point(t_camera cam, t_vec3fc new_point)
 {
-	t_vec2f projection;
+	t_vec2fc projection;
 
 	projection.x = (float)(((cam.viewer.z / fabs(new_point.z))
 							* new_point.x) - cam.viewer.x);
@@ -49,12 +49,12 @@ static t_vec2f	project_point(t_camera cam, t_vec3f new_point)
 	return (projection);
 }
 
-t_vec2f			perspective_projection(t_scene scene, t_vec3f point)
+t_vec3fc			perspective_projection(t_scene scene, t_vec3fc point)
 {
-	t_vec3f		new_point;
-	t_vec2f		projection;
-	t_vec2f		normalized_points;
-	t_vec2f		rasterized_points;
+	t_vec3fc		new_point;
+	t_vec2fc		projection;
+	t_vec2fc		normalized_points;
+	t_vec3fc		rasterized_points;
 	t_camera	cam;
 
 	cam = *(scene.camera);
@@ -67,5 +67,6 @@ t_vec2f			perspective_projection(t_scene scene, t_vec3f point)
 	normalized_points.y = (1 - projection.y) / 2;
 	rasterized_points.x = (int)(normalized_points.x * 1000);
 	rasterized_points.y = (int)(normalized_points.y * 1000);
+    rasterized_points.z = new_point.z;
 	return (rasterized_points);
 }

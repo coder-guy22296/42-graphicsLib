@@ -12,7 +12,7 @@
 
 #include "libgraphics.h"
 
-t_camera	*new_camera(t_vec6f camera_loc, t_vec3f viewer_loc)
+t_camera	*new_camera(t_vec6f camera_loc, t_vec3fc viewer_loc)
 {
 	t_camera *cam;
 
@@ -23,7 +23,7 @@ t_camera	*new_camera(t_vec6f camera_loc, t_vec3f viewer_loc)
 	return (cam);
 }
 
-t_camera	camera(t_vec6f camera_loc, t_vec3f viewer_loc)
+t_camera	camera(t_vec6f camera_loc, t_vec3fc viewer_loc)
 {
 	t_camera cam;
 

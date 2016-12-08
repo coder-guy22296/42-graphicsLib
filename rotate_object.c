@@ -12,13 +12,13 @@
 
 #include "libgraphics.h"
 
-void	rotate_object(t_3d_object *obj, t_vec3f rotation)
+void	rotate_object(t_3d_object *obj, t_vec3fc rotation)
 {
 	int		index;
 	float	sin_t;
 	float	cos_t;
-	t_vec3f	original;
-	t_vec3f	*new_point;
+	t_vec3fc	original;
+	t_vec3fc	*new_point;
 
 	index = 0;
 	while (index < obj->vertex_cnt)

@@ -18,8 +18,8 @@ void	render3d_object(t_renderer renderer, t_3d_object obj)
 	int		cur_vertex;
 	int		*face_vertices;
 	int		next_vertex;
-	t_vec3f	vert1;
-	t_vec3f	vert2;
+	t_vec3fc	vert1;
+	t_vec3fc	vert2;
 
 	cur_face = 0;
 	face_vertices = obj.vertex_ind;

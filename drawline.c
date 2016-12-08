@@ -11,9 +11,22 @@
 /* ************************************************************************** */
 
 #include <math.h>
+#include <stdlib.h>
 #include "libgraphics.h"
 
-void	drawline(t_renderer renderer, t_vec2f point_a, t_vec2f point_b)
+int	blend(int color_a, int color_b, int steps, int cur) {
+	static int delta;
+
+	if (color_a > color_b) {
+		delta = (color_a - color_b) / steps;
+		return (color_b + (delta * cur));
+	} else {
+		delta = (color_b - color_a) / steps;
+		return (color_a + (delta * cur));
+	}
+}
+
+void	drawline(t_renderer renderer, t_vec3fc point_a, t_vec3fc point_b)
 {
 	int		deltax;
 	int		deltay;
@@ -48,7 +61,7 @@ void	drawline(t_renderer renderer, t_vec2f point_a, t_vec2f point_b)
 			deltaerr = fabs((double)deltax / (double)deltay);
 			error += deltaerr;
 		}
-		mlx_pixel_put(renderer.mlx, renderer.window, x, y, 0x00FF00FF);
+		mlx_pixel_put(renderer.mlx, renderer.window, x, y, (point_a.z < point_b.z) ? point_a.color : point_b.color);
 		error += deltaerr;
 		if (error >= 0.0)
 		{
@@ -60,7 +73,7 @@ void	drawline(t_renderer renderer, t_vec2f point_a, t_vec2f point_b)
 	error += deltaerr;
 	while (fabs(slope) <= 1.0 && x != point_b.x)
 	{
-		mlx_pixel_put(renderer.mlx, renderer.window, x, y, 0x00FF00FF);
+		mlx_pixel_put(renderer.mlx, renderer.window, x, y, (point_a.z < point_b.z) ? point_a.color : point_b.color);
 		error += deltaerr;
 		if (error >= 0.0)
 		{

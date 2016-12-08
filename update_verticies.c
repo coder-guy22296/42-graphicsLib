@@ -15,7 +15,7 @@
 t_3d_object	update_verticies(t_3d_object *obj)
 {
 	int		index;
-	t_vec3f	rotation;
+	t_vec3fc	rotation;
 
 	rotation = obj->pos_vector.rotation;
 	index = 0;

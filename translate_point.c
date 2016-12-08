@@ -12,12 +12,13 @@
 
 #include "libgraphics.h"
 
-t_vec3f	translate_point(t_vec3f original, t_vec3f translation)
+t_vec3fc	translate_point(t_vec3fc original, t_vec3fc translation)
 {
-	t_vec3f translated_point;
+	t_vec3fc translated_point;
 
 	translated_point.x = original.x + translation.x;
 	translated_point.y = original.y + translation.y;
 	translated_point.z = original.z + translation.z;
+	translated_point.color = original.color;
 	return (translated_point);
 }

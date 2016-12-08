@@ -12,7 +12,7 @@
 
 #include "libgraphics.h"
 
-t_vec6f	*new_vec6f(t_vec3f pos, t_vec3f rot)
+t_vec6f	*new_vec6f(t_vec3fc pos, t_vec3fc rot)
 {
 	t_vec6f *pos_rot;
 
@@ -23,7 +23,7 @@ t_vec6f	*new_vec6f(t_vec3f pos, t_vec3f rot)
 	return (pos_rot);
 }
 
-t_vec6f	vec6f(t_vec3f pos, t_vec3f rot)
+t_vec6f	vec6f(t_vec3fc pos, t_vec3fc rot)
 {
 	t_vec6f pos_rot;
 

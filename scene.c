@@ -12,7 +12,7 @@
 
 #include "libgraphics.h"
 
-t_scene	*new_scene(t_vec2f (*projection)(t_scene scene, t_vec3f point))
+t_scene	*new_scene(t_vec3fc (*projection)(t_scene scene, t_vec3fc point))
 {
 	t_scene *scene3d;
 
@@ -22,7 +22,7 @@ t_scene	*new_scene(t_vec2f (*projection)(t_scene scene, t_vec3f point))
 	return (scene3d);
 }
 
-t_scene	scene(t_vec2f (*projection)(t_scene scene, t_vec3f point))
+t_scene	scene(t_vec3fc (*projection)(t_scene scene, t_vec3fc point))
 {
 	t_scene scene3d;
 
