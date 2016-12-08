@@ -40,25 +40,21 @@ MLX = ../minilibx/
 
 all: $(NAME)
 
-$(NAME): precom
+$(NAME):
 	gcc -Wall -Wextra -Werror -I $(LIBFT) -I $(MLX) -c $(SRC)
 	ar rc $(NAME).a $(OFILES)
 	ranlib $(NAME).a
 
 clean:
 	rm -rf $(OFILES)
-	make -C $(MLX) clean
-	make -C $(LIBFT) clean
 
 fclean: clean
 	rm -f $(NAME).a
-	make -C $(LIBFT) fclean
 
 re: fclean all
-	make -C $(LIBFT) re
 
 precom:
-	make -C $(LIBFT) re
+	make -C $(LIBFT)
 
 norm:
 	norminette $(SRC) $(NAME).h
