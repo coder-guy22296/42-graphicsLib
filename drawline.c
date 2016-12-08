@@ -16,7 +16,7 @@
 #define RED 16
 #define GREEN 8
 #define BLUE 0
-int	blend(int color_a, int color_b, int steps, int cur) {
+int	blend(int color_a, int color_b, int steps, int start,  int cur) {
 	static int delta;
 
 	int red_a = color_a & (255 << 16) >> 16;
@@ -34,24 +34,26 @@ int	blend(int color_a, int color_b, int steps, int cur) {
 
 
 	int blend;
-	if (color_a < color_b)
-	{
+
+	cur = abs(cur - start);
+	// if (color_a < color_b)
+	// {
 		dr = (red_b - red_a) / steps;
 		dg = (green_b - green_a) / steps;
 		db = (blue_b - blue_a) / steps;
 		blend = color_a | ((red_a + (dr*cur))<<16) | ((green_a + (dg*cur))<<8) | (blue_a + (db*cur));
 
-	}
-	else if (color_a > color_b)
-	{
-		dr = (red_a - red_b) / steps;
-		dg = (green_a - green_b) / steps;
-		db = (blue_a - blue_b) / steps;
-		blend = color_b | ((red_b + (dr*cur))<<16) | ((green_b + (dg*cur))<<8) | (blue_b + (db*cur));
+	// }
+	// else if (color_a > color_b)
+	// {
+	// 	dr = (red_a - red_b) / steps;
+	// 	dg = (green_a - green_b) / steps;
+	// 	db = (blue_a - blue_b) / steps;
+	// 	blend = color_b | ((red_b + (dr*cur))<<16) | ((green_b + (dg*cur))<<8) | (blue_b + (db*cur));
 
-	}
-	else
-		return (color_a);
+	// }
+	// else
+	// 	return (color_a);
 
 	if (blend == 0x00000000)
 		ft_putstr("RENDERED BLACK PIXEL!!!!\n");
@@ -120,7 +122,7 @@ void	drawline(t_renderer renderer, t_vec3fc point_a, t_vec3fc point_b)
 			deltaerr = fabs((double)deltax / (double)deltay);
 			error += deltaerr;
 		}
-		mlx_pixel_put(renderer.mlx, renderer.window, x, y, blend(point_a.color, point_b.color, (abs(deltax) > abs (deltay)) ? abs(deltax):abs(deltay), (abs(deltax) > abs (deltay)) ? x - point_a.x: y - point_a.y))/*(point_a.z < point_b.z) ? point_a.color : point_b.color)*/;
+		mlx_pixel_put(renderer.mlx, renderer.window, x, y, blend(point_a.color, point_b.color, abs(deltay), point_a.y, y)/*(point_a.z < point_b.z) ? point_a.color : point_b.color)*/;
 		error += deltaerr;
 		if (error >= 0.0)
 		{
@@ -132,7 +134,7 @@ void	drawline(t_renderer renderer, t_vec3fc point_a, t_vec3fc point_b)
 	error += deltaerr;
 	while (fabs(slope) <= 1.0 && x != point_b.x)
 	{
-		mlx_pixel_put(renderer.mlx, renderer.window, x, y, blend(point_a.color, point_b.color, (abs(deltax) > abs (deltay)) ? abs(deltax):abs(deltay), (abs(deltax) > abs (deltay)) ? x - point_a.x: y - point_a.y))/*(point_a.z < point_b.z) ? point_a.color : point_b.color)*/;
+		mlx_pixel_put(renderer.mlx, renderer.window, x, y, blend(point_a.color, point_b.color, abs(deltax), point_a.x, x)/*(point_a.z < point_b.z) ? point_a.color : point_b.color)*/;
 		error += deltaerr;
 		if (error >= 0.0)
 		{
