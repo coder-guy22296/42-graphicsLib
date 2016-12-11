@@ -13,6 +13,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include "libgraphics.h"
+#include <stdio.h> // REMOVE
 #define RED 16
 #define GREEN 8
 #define BLUE 0
@@ -164,15 +165,18 @@ void	drawline(t_renderer renderer, t_vec3fc point_a, t_vec3fc point_b)
 		xdir = -1;
 	if (deltay < 0)
 		ydir = -1;
-	while ((fabs(slope) > 1.0 || deltax == 0) && y != (int)end.y + ydir)
+	while ((fabs(slope) > 1.0 || deltax == 0) && y != (int)end.y/* + ydir*/)
 	{
+		deltaerr = fabs((double)deltax / (double)deltay);
 		if (y == start.y)
 		{
-			deltaerr = fabs((double)deltax / (double)deltay);
+
 			error += deltaerr;
 		}
+
 		mlx_pixel_put(renderer.mlx, renderer.window, x, y, blend(start.color, end.color, abs(deltay), (int)start.y, y))/*(point_a.z < point_b.z) ? point_a.color : point_b.color)*/;
 		error += deltaerr;
+		//printf("error: %f\n", error);
 		if (error >= 0.0)
 		{
 			x += xdir;
@@ -186,7 +190,7 @@ void	drawline(t_renderer renderer, t_vec3fc point_a, t_vec3fc point_b)
 	*/
 
 	error += deltaerr;
-	while (fabs(slope) <= 1.0 && x != (int)end.x + xdir)
+	while (fabs(slope) <= 1.0 && x != (int)end.x/* + xdir*/)
 	{
 		mlx_pixel_put(renderer.mlx, renderer.window, x, y, blend(start.color, end.color, abs(deltax), (int)start.x, x))/*(point_a.z < point_b.z) ? point_a.color : point_b.color)*/;
 		error += deltaerr;
