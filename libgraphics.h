@@ -66,6 +66,7 @@ typedef struct	s_scene
 	t_vec3fc	origin_point;
 	t_camera	*camera;
 	t_list		*objects;
+	t_vec3fc	scale;
 	t_vec3fc	(*projection_method)(struct s_scene scene,
 										t_vec3fc point);
 }				t_scene;
@@ -74,6 +75,8 @@ typedef struct	s_renderer
 {
 	void		*mlx;
 	void		*window;
+	int			win_x;
+	int			win_y;
 	t_scene		*scene;
 	t_vec2fc	last_click;
 
@@ -92,7 +95,7 @@ void			del_3d_object(t_3d_object *obj);
 void			del_scene(t_scene *scene);
 void			del_renderer(t_renderer *renderer);
 t_vec3fc		perspective_projection(t_scene scene, t_vec3fc point);
-//t_vec2i		orthographic_projection(t_scene scene, t_vec3fc point);
+t_vec3fc		orthographic_projection(t_scene scene, t_vec3fc point);
 t_vec3fc		translate_point(t_vec3fc original, t_vec3fc translation);
 void			rotate_object(t_3d_object *obj, t_vec3fc rotation);
 void			drawline(t_renderer renderer, t_vec3fc point_a, t_vec3fc point_b);
