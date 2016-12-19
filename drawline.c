@@ -34,10 +34,10 @@ int	blend(int color_a, int color_b, float percentage)
 	float dr;
 	float dg;
 	float db;
-	int blend;
+	int blend = 0;
 
-
-	//printf("percent: %f\n", percentage);
+	if (color_a == color_b || (int)percentage <= 0)
+		return (color_a);
 	dr = fabsf((red_b - red_a));
 	dg = fabsf((green_b - green_a));
 	db = fabsf((blue_b - blue_a));
@@ -45,8 +45,6 @@ int	blend(int color_a, int color_b, float percentage)
 		blend = (((int)(red_a + (dr * percentage)))<<16) | (((int)(green_a + (dg * percentage)))<<8) | ((int)(blue_a + (db * percentage)));
 	else if (color_a > color_b)
 		blend = (((int)(red_a - (dr * percentage)))<<16) | (((int)(green_a - (dg * percentage)))<<8) | ((int)(blue_a - (db * percentage)));
-	else
-		return (color_a);
 	return (blend);
 }
 
