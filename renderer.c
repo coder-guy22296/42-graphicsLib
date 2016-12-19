@@ -12,7 +12,7 @@
 
 #include "libgraphics.h"
 
-t_renderer	*new_renderer(void (*render)(struct s_renderer, t_scene))
+t_renderer	*new_renderer(void (*render)(t_renderer *, t_scene))
 {
 	t_renderer	*renderer3d;
 
@@ -23,7 +23,7 @@ t_renderer	*new_renderer(void (*render)(struct s_renderer, t_scene))
 	return (renderer3d);
 }
 
-t_renderer	renderer(void (*render)(struct s_renderer, t_scene))
+t_renderer	renderer(void (*render)(t_renderer *, t_scene))
 {
 	t_renderer	renderer3d;
 

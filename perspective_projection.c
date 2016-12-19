@@ -70,5 +70,6 @@ t_vec3fc			perspective_projection(t_scene scene, t_vec3fc point)
 	rasterized_points.x = (int)(normalized_points.x * 1000);
 	rasterized_points.y = (int)(normalized_points.y * 1000);
     rasterized_points.z = new_point.z;
+	rasterized_points.color = point.color;
 	return (rasterized_points);
 }

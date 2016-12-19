@@ -20,6 +20,7 @@ SRC =   add_object.c\
 		drawline3d.c\
 		perspective_projection.c\
 		orthographic_projection.c\
+		frame_pixel_put.c\
 		rem_object.c\
 		render3d_object.c\
 		render_scene.c\

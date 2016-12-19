@@ -64,6 +64,11 @@ int	blend(int color_a, int color_b, int steps, int start,  int cur) {
 	if (blend == 0x00000000)
 		ft_putstr("RENDERED BLACK PIXEL!!!!\n");
 
+	if (color_a == 0x4F000000 || color_b == 0x4F000000)
+	{
+		ft_putstr("\t\t\t\tbad line attempt!!!!!!!!!!!!!!\n");
+	}
+
 //	ft_putstr("cur: ");
 //	ft_putnbr(cur);
 //
@@ -122,7 +127,7 @@ int	blend2(t_vec3fc point_a, t_vec3fc point_b, int x, int y) {
 	return (blend);
 }
 */
-void	drawline(t_renderer renderer, t_vec3fc point_a, t_vec3fc point_b)
+void	drawline(t_renderer *renderer, t_vec3fc point_a, t_vec3fc point_b)
 {
 	int		deltax;
 	int		deltay;
@@ -137,6 +142,8 @@ void	drawline(t_renderer renderer, t_vec3fc point_a, t_vec3fc point_b)
 	t_vec3fc end;
 
 
+
+	//ft_putstr("line drawn!");
 
 	if (point_a.x > point_b.x)
 	{
@@ -173,8 +180,8 @@ void	drawline(t_renderer renderer, t_vec3fc point_a, t_vec3fc point_b)
 
 			error += deltaerr;
 		}
-
-		mlx_pixel_put(renderer.mlx, renderer.window, x, y, blend(start.color, end.color, abs(deltay), (int)start.y, y))/*(point_a.z < point_b.z) ? point_a.color : point_b.color)*/;
+		frame_pixel_put(renderer->scene, vec2fc(x, y, blend(start.color, end.color, abs(deltay), (int)start.y, y)));
+		//mlx_pixel_put(renderer.mlx, renderer.window, x, y, blend(start.color, end.color, abs(deltay), (int)start.y, y))/*(point_a.z < point_b.z) ? point_a.color : point_b.color)*/;
 		error += deltaerr;
 		//printf("error: %f\n", error);
 		if (error >= 0.0)
@@ -192,7 +199,8 @@ void	drawline(t_renderer renderer, t_vec3fc point_a, t_vec3fc point_b)
 	error += deltaerr;
 	while (fabs(slope) <= 1.0 && x != (int)end.x/* + xdir*/)
 	{
-		mlx_pixel_put(renderer.mlx, renderer.window, x, y, blend(start.color, end.color, abs(deltax), (int)start.x, x))/*(point_a.z < point_b.z) ? point_a.color : point_b.color)*/;
+		frame_pixel_put(renderer->scene, vec2fc(x, y, blend(start.color, end.color, abs(deltax), (int)start.x, x)));
+		//mlx_pixel_put(renderer.mlx, renderer.window, x, y, blend(start.color, end.color, abs(deltax), (int)start.x, x))/*(point_a.z < point_b.z) ? point_a.color : point_b.color)*/;
 		error += deltaerr;
 		if (error >= 0.0)
 		{
