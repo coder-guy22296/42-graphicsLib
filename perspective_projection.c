@@ -62,7 +62,7 @@ t_vec3fc			perspective_projection(t_scene scene, t_vec3fc point)
 	point.y += scene.origin_point.y;
 	point.z += scene.origin_point.z;
 	new_point = camera_transform(cam, point);
-	if (new_point.z > 0)
+	if (new_point.z > 0.0)
 		return (vec3fc(0,0,0,0x4F000000));
 	projection = project_point(cam, new_point);
 	normalized_points.x = (projection.x + 1) / 2;

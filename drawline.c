@@ -17,9 +17,12 @@
 #define RED 16
 #define GREEN 8
 #define BLUE 0
-int	blend(int color_a, int color_b, int steps, int start,  int cur) {
-	static int delta;
 
+
+
+
+int	blend(int color_a, int color_b, float percentage)
+{
 	float red_a = (color_a & (255 << 16)) >> 16;
 	float green_a = (color_a & (255 << 8)) >> 8;
 	float blue_a = (color_a & (255 << 0));
@@ -31,82 +34,112 @@ int	blend(int color_a, int color_b, int steps, int start,  int cur) {
 	float dr;
 	float dg;
 	float db;
-
-
-
 	int blend;
 
-	cur = abs(cur - start);
 
-
-	dr = fabsf((red_b - red_a) / steps);
-	dg = fabsf((green_b - green_a) / steps);
-	db = fabsf((blue_b - blue_a) / steps);
-
-	//blend = color_a | ((red_a + (dr*cur))<<16) | ((green_a + (dg*cur))<<8) | (blue_a + (db*cur));
-	 if (color_a < color_b)
-	 {
-		blend = (((int)(red_a + (dr*cur)))<<16) | (((int)(green_a + (dg*cur)))<<8) | ((int)(blue_a + (db*cur)));
-
-	 }
-	 else if (color_a > color_b)
-	 {
-	 	//dr = (red_a - red_b) / steps;
-	 	//dg = (green_a - green_b) / steps;
-	 	//db = (blue_a - blue_b) / steps;
-	 	//blend = color_b | ((red_b - (dr*cur))<<16) | ((green_b - (dg*cur))<<8) | (blue_b - (db*cur));
-		blend = (((int)(red_a - (dr*cur)))<<16) | (((int)(green_a - (dg*cur)))<<8) | ((int)(blue_a - (db*cur)));
-
-	 }
-	 else
-	 	return (color_a);
-
-	if (blend == 0x00000000)
-		ft_putstr("RENDERED BLACK PIXEL!!!!\n");
-
-	if (color_a == 0x4F000000 || color_b == 0x4F000000)
-	{
-		ft_putstr("\t\t\t\tbad line attempt!!!!!!!!!!!!!!\n");
-	}
-
-//	ft_putstr("cur: ");
-//	ft_putnbr(cur);
-//
-//	ft_putstr("\t\tsteps: ");
-//	ft_putnbr(steps);
-//
-//	ft_putstr("\t\tdelta red: ");
-//	ft_putnbr(dr);
-//
-//	ft_putstr("\t\tdelta green: ");
-//	ft_putnbr(dg);
-//
-//	ft_putstr("\t\tdelta blue: ");
-//	ft_putnbr(db);
-//
-//	ft_putstr("\t\tred: ");
-//	ft_putnbr((blend & (255 << 16)) >> 16);
-//
-//	ft_putstr("\t\tgreen: ");
-//	ft_putnbr((blend & (255 << 8)) >> 8);
-//
-//	ft_putstr("\t\tblue: ");
-//	ft_putnbr((blend & (255 << 0)) >> 0);
-//
-//	ft_putstr("\n");
-//	ft_putstr("color: ");
-//	ft_putnbr(blend);
-//	ft_putstr("\n");
-
+	//printf("percent: %f\n", percentage);
+	dr = fabsf((red_b - red_a));
+	dg = fabsf((green_b - green_a));
+	db = fabsf((blue_b - blue_a));
+	if (color_a < color_b)
+		blend = (((int)(red_a + (dr * percentage)))<<16) | (((int)(green_a + (dg * percentage)))<<8) | ((int)(blue_a + (db * percentage)));
+	else if (color_a > color_b)
+		blend = (((int)(red_a - (dr * percentage)))<<16) | (((int)(green_a - (dg * percentage)))<<8) | ((int)(blue_a - (db * percentage)));
+	else
+		return (color_a);
 	return (blend);
-	if (color_a > color_b) {
-		delta = (color_a - color_b) / steps;
-		return (color_b + (delta * cur));
-	} else {
-		delta = (color_b - color_a) / steps;
-		return (color_a + (delta * cur));
-	}
 }
+
+//int	blend(int color_a, int color_b, int steps, int start,  int cur) {
+//	static int delta;
+//
+//	float red_a = (color_a & (255 << 16)) >> 16;
+//	float green_a = (color_a & (255 << 8)) >> 8;
+//	float blue_a = (color_a & (255 << 0));
+//
+//	float red_b = (color_b & (255 << 16)) >> 16;
+//	float green_b = (color_b & (255 << 8)) >> 8;
+//	float blue_b = (color_b & (255 << 0));
+//
+//	float dr;
+//	float dg;
+//	float db;
+//
+//
+//
+//	int blend;
+//
+//	cur = abs(cur - start);
+//
+//
+//	dr = fabsf((red_b - red_a) / steps);
+//	dg = fabsf((green_b - green_a) / steps);
+//	db = fabsf((blue_b - blue_a) / steps);
+//
+//	//blend = color_a | ((red_a + (dr*cur))<<16) | ((green_a + (dg*cur))<<8) | (blue_a + (db*cur));
+//	 if (color_a < color_b)
+//	 {
+//		blend = (((int)(red_a + (dr*cur)))<<16) | (((int)(green_a + (dg*cur)))<<8) | ((int)(blue_a + (db*cur)));
+//
+//	 }
+//	 else if (color_a > color_b)
+//	 {
+//	 	//dr = (red_a - red_b) / steps;
+//	 	//dg = (green_a - green_b) / steps;
+//	 	//db = (blue_a - blue_b) / steps;
+//	 	//blend = color_b | ((red_b - (dr*cur))<<16) | ((green_b - (dg*cur))<<8) | (blue_b - (db*cur));
+//		blend = (((int)(red_a - (dr*cur)))<<16) | (((int)(green_a - (dg*cur)))<<8) | ((int)(blue_a - (db*cur)));
+//
+//	 }
+//	 else
+//	 	return (color_a);
+//
+//	if (blend == 0x00000000)
+//		ft_putstr("RENDERED BLACK PIXEL!!!!\n");
+//
+//	if (color_a == 0x4F000000 || color_b == 0x4F000000)
+//	{
+//		ft_putstr("\t\t\t\tbad line attempt!!!!!!!!!!!!!!\n");
+//	}
+//
+////	ft_putstr("cur: ");
+////	ft_putnbr(cur);
+////
+////	ft_putstr("\t\tsteps: ");
+////	ft_putnbr(steps);
+////
+////	ft_putstr("\t\tdelta red: ");
+////	ft_putnbr(dr);
+////
+////	ft_putstr("\t\tdelta green: ");
+////	ft_putnbr(dg);
+////
+////	ft_putstr("\t\tdelta blue: ");
+////	ft_putnbr(db);
+////
+////	ft_putstr("\t\tred: ");
+////	ft_putnbr((blend & (255 << 16)) >> 16);
+////
+////	ft_putstr("\t\tgreen: ");
+////	ft_putnbr((blend & (255 << 8)) >> 8);
+////
+////	ft_putstr("\t\tblue: ");
+////	ft_putnbr((blend & (255 << 0)) >> 0);
+////
+////	ft_putstr("\n");
+////	ft_putstr("color: ");
+////	ft_putnbr(blend);
+////	ft_putstr("\n");
+//
+//	return (blend);
+//	if (color_a > color_b) {
+//		delta = (color_a - color_b) / steps;
+//		return (color_b + (delta * cur));
+//	} else {
+//		delta = (color_b - color_a) / steps;
+//		return (color_a + (delta * cur));
+//	}
+//}
 /*
 int	blend2(t_vec3fc point_a, t_vec3fc point_b, int x, int y) {
 	static int delta;
@@ -180,7 +213,7 @@ void	drawline(t_renderer *renderer, t_vec3fc point_a, t_vec3fc point_b)
 
 			error += deltaerr;
 		}
-		frame_pixel_put(renderer->scene, vec2fc(x, y, blend(start.color, end.color, abs(deltay), (int)start.y, y)));
+		frame_pixel_put(renderer->scene, vec2fc(x, y, blend(start.color, end.color, (fabsf((float)y - start.y))/abs(deltay))));
 		//mlx_pixel_put(renderer.mlx, renderer.window, x, y, blend(start.color, end.color, abs(deltay), (int)start.y, y))/*(point_a.z < point_b.z) ? point_a.color : point_b.color)*/;
 		error += deltaerr;
 		//printf("error: %f\n", error);
@@ -199,7 +232,7 @@ void	drawline(t_renderer *renderer, t_vec3fc point_a, t_vec3fc point_b)
 	error += deltaerr;
 	while (fabs(slope) <= 1.0 && x != (int)end.x/* + xdir*/)
 	{
-		frame_pixel_put(renderer->scene, vec2fc(x, y, blend(start.color, end.color, abs(deltax), (int)start.x, x)));
+		frame_pixel_put(renderer->scene, vec2fc(x, y, blend(start.color, end.color, (fabsf((float)x - start.x))/abs(deltax))));
 		//mlx_pixel_put(renderer.mlx, renderer.window, x, y, blend(start.color, end.color, abs(deltax), (int)start.x, x))/*(point_a.z < point_b.z) ? point_a.color : point_b.color)*/;
 		error += deltaerr;
 		if (error >= 0.0)

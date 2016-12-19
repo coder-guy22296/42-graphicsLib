@@ -73,6 +73,8 @@ typedef struct	s_3d_object
 	int			*faces_arr;
 	int			face_cnt;
 	int			*vertex_ind;
+	float			z_max;
+	float			z_min;
 	t_vec3fc	*vertices;
 	int			vertex_cnt;
 	t_vec6f		pos_vector;
@@ -125,6 +127,7 @@ t_vec3fc		*new_vec3f(float x, float y, float z);
 t_vec6f			*new_vec6f(t_vec3fc pos, t_vec3fc rot);
 t_3d_object		*new_3d_object(char *filename);
 int				frame_pixel_put(t_scene *scene, t_vec2fc place_me);
+int	blend(int color_a, int color_b, float percentage);
 t_camera		*new_camera(t_vec6f camera_loc, t_vec3fc viewer_loc);
 t_scene			*new_scene(t_vec3fc (*projection)(t_scene scene, t_vec3fc point));
 t_renderer		*new_renderer(void (*render)(t_renderer *, t_scene));

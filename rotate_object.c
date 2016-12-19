@@ -23,32 +23,32 @@ void	rotate_object(t_3d_object *obj, t_vec3fc rotation)
 	index = 0;
 	while (index < obj->vertex_cnt)
 	{
-		original = obj->vertices[index];
-		new_point = &obj->vertices[index];
-		if (rotation.x)
+		if ((int)obj->vertices[index].z != -2147483648)
 		{
-			sin_t = sin(rotation.x);
-			cos_t = cos(rotation.x);
-			new_point->y = original.y * cos_t - original.z * sin_t;
-			new_point->z = original.z * cos_t + original.y * sin_t;
-		}
-		original = obj->vertices[index];
-		new_point = &obj->vertices[index];
-		if (rotation.y)
-		{
-			sin_t = sin(rotation.y);
-			cos_t = cos(rotation.y);
-			new_point->x = original.x * cos_t - original.z * sin_t;
-			new_point->z = original.z * cos_t + original.x * sin_t;
-		}
-		original = obj->vertices[index];
-		new_point = &obj->vertices[index];
-		if (rotation.z)
-		{
-			sin_t = sin(rotation.z);
-			cos_t = cos(rotation.z);
-			new_point->x = original.x * cos_t - original.y * sin_t;
-			new_point->y = original.y * cos_t + original.x * sin_t;
+			original = obj->vertices[index];
+			new_point = &obj->vertices[index];
+			if (rotation.x) {
+				sin_t = sin(rotation.x);
+				cos_t = cos(rotation.x);
+				new_point->y = original.y * cos_t - original.z * sin_t;
+				new_point->z = original.z * cos_t + original.y * sin_t;
+			}
+			original = obj->vertices[index];
+			new_point = &obj->vertices[index];
+			if (rotation.y) {
+				sin_t = sin(rotation.y);
+				cos_t = cos(rotation.y);
+				new_point->x = original.x * cos_t - original.z * sin_t;
+				new_point->z = original.z * cos_t + original.x * sin_t;
+			}
+			original = obj->vertices[index];
+			new_point = &obj->vertices[index];
+			if (rotation.z) {
+				sin_t = sin(rotation.z);
+				cos_t = cos(rotation.z);
+				new_point->x = original.x * cos_t - original.y * sin_t;
+				new_point->y = original.y * cos_t + original.x * sin_t;
+			}
 		}
 		index++;
 	}
