@@ -12,6 +12,8 @@
 
 NAME = libgraphics
 SRC =   add_object.c\
+        window.c\
+        frame.c\
 		camera.c\
 		del_3d_object.c\
 		del_renderer.c\

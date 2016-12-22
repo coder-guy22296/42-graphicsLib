@@ -36,7 +36,8 @@ int	blend(int color_a, int color_b, float percentage)
 	float db;
 	int blend = 0;
 
-	if (color_a == color_b || (int)percentage <= 0)
+	// printf("percentage: %f\n", percentage);
+	if (color_a == color_b || percentage < 0.000001)
 		return (color_a);
 	dr = fabsf((red_b - red_a));
 	dg = fabsf((green_b - green_a));

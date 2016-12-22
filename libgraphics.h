@@ -16,6 +16,7 @@
 # include <math.h>
 # include "libft.h"
 # include "mlx.h"
+# include <stdio.h> ///remove this shit
 
 #define UP 126
 #define DOWN 125
@@ -126,10 +127,13 @@ t_vec2fc		*new_vec2f(float x, float y);
 t_vec3fc		*new_vec3f(float x, float y, float z);
 t_vec6f			*new_vec6f(t_vec3fc pos, t_vec3fc rot);
 t_3d_object		*new_3d_object(char *filename);
+t_frame		new_frame(int height, int width);
+void	add_window(t_renderer *renderer, int width, int height, char *title);
 int				frame_pixel_put(t_scene *scene, t_vec2fc place_me);
 int	blend(int color_a, int color_b, float percentage);
 t_camera		*new_camera(t_vec6f camera_loc, t_vec3fc viewer_loc);
-t_scene			*new_scene(t_vec3fc (*projection)(t_scene scene, t_vec3fc point));
+t_scene			*new_scene(t_vec3fc (*projection)(t_scene scene, t_vec3fc point),
+							  int frame_height, int frame_width);
 t_renderer		*new_renderer(void (*render)(t_renderer *, t_scene));
 void			del_3d_object(t_3d_object *obj);
 void			del_scene(t_scene *scene);
@@ -152,7 +156,8 @@ t_vec3fc		vec3f(float x, float y, float z);
 t_vec3fc		vec3fc(float x, float y, float z, int color);
 t_vec6f			vec6f(t_vec3fc pos, t_vec3fc rot);
 t_camera		camera(t_vec6f camera_loc, t_vec3fc viewer_loc);
-t_scene			scene(t_vec3fc (*projection)(t_scene scene, t_vec3fc point));
+t_scene			scene(t_vec3fc (*projection)(t_scene scene, t_vec3fc point),
+						 int frame_height, int frame_width);
 t_renderer		renderer(void (*render)(t_renderer *, t_scene));
 
 #endif

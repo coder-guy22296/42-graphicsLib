@@ -20,6 +20,8 @@ t_renderer	*new_renderer(void (*render)(t_renderer *, t_scene))
 		return (NULL);
 	renderer3d->mlx = mlx_init();
 	renderer3d->render = render;
+	renderer3d->last_click.x = -99;
+	renderer3d->last_click.y = -99;
 	return (renderer3d);
 }
 

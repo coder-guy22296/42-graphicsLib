@@ -43,29 +43,10 @@ void	render_scene(t_renderer *renderer, t_scene scene)
 		}
 		render3d_object(renderer, *((t_3d_object *)(current->content)));
 	}
-	/*int i = 0;
-	while (i < 1000000)
-	{
-		ft_putnbr(((int *)renderer->scene->cur_frame.image)[i]);
-		i++;
-	}*/
 
-//	int i, j;
-//	for (i = 0; i < 50; i++)
-//	{
-//		for (j = 0; j < 50; j++)
-//		{
-//			renderer->scene->cur_frame.image[4 * i + 4000 * j] = 255;
-//			renderer->scene->cur_frame.image[4 * i + 4000 * j + 1] = 255;
-//			renderer->scene->cur_frame.image[4 * i + 4000 * j + 2] = 0;
-//		}
-//	}
-	//renderer->scene->cur_frame.image[1] = 255;
-	//renderer->scene->cur_frame.image[2] = 255;
 	//render frame to window
 	mlx_put_image_to_window(renderer->mlx, renderer->window,
 							renderer->scene->cur_frame.id, 0, 0);
-	mlx_pixel_put(renderer->mlx, renderer->window, 50, 50, 0xff0000);
 
 	//free the frame
 	mlx_destroy_image(renderer->mlx, renderer->scene->cur_frame.id);
