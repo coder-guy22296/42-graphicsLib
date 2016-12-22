@@ -16,6 +16,7 @@ t_frame		new_frame(int height, int width)
 {
 	t_frame frame;
 
+	ft_bzero(&frame, sizeof(frame));
 	frame.height = height;
 	frame.width = width;
 	return (frame);
