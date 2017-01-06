@@ -82,20 +82,13 @@ void		drawline(t_renderer *renderer, t_vec3fc point_a, t_vec3fc point_b)
 	}
 	deltax = (int)end.x - (int)start.x;
 	deltay = (int)end.y - (int)start.y;
-	if (deltax == 0)
-		slope = 0;
-	else
-		slope = (double)deltay / (double)deltax;
+	slope = (deltax == 0) ? 0 : (double)deltay / (double)deltax;
 	error = -1.0;
 	deltaerr = fabs(slope);
-	xdir = 1;
-	ydir = 1;
 	x = (int)start.x;
 	y = (int)start.y;
-	if (deltax < 0)
-		xdir = -1;
-	if (deltay < 0)
-		ydir = -1;
+	xdir = (deltax < 0) ? -1 : 1;
+	ydir = (deltay < 0) ? -1 : 1;
 	while ((fabs(slope) > 1.0 || deltax == 0) && y != (int)end.y)
 	{
 		deltaerr = fabs((double)deltax / (double)deltay);
