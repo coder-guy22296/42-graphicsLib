@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "libgraphics.h"
-#include <stdio.h>
 #include <stdlib.h>
 
 void	render_scene(t_renderer *renderer, t_scene scene)

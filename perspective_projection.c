@@ -18,23 +18,23 @@ static t_vec3fc	camera_transform(t_camera cam, t_vec3fc point)
 	t_vec3fc	new_point;
 
 	new_point.x = (float)(cos(cam.loc.rotation.y) * (sin(cam.loc.rotation.z)
-	* (point.y - cam.loc.position.y) + cos(cam.loc.rotation.z)
-	* (point.x - cam.loc.position.x)) - sin(cam.loc.rotation.y)
-	* (point.z - cam.loc.position.z));
+				* (point.y - cam.loc.position.y) + cos(cam.loc.rotation.z)
+				* (point.x - cam.loc.position.x)) - sin(cam.loc.rotation.y)
+				* (point.z - cam.loc.position.z));
 	new_point.y = (float)(sin(cam.loc.rotation.x) * (cos(cam.loc.rotation.y)
-	* (point.z - cam.loc.position.z) + sin(cam.loc.rotation.y)
-	* (sin(cam.loc.rotation.z) * (point.y - cam.loc.position.y)
-	+ cos(cam.loc.rotation.z) * (point.x - cam.loc.position.x)))
-	+ cos(cam.loc.rotation.x) * (cos(cam.loc.rotation.z)
-	* (point.y - cam.loc.position.y) - sin(cam.loc.rotation.z)
-	* (point.x - cam.loc.position.x)));
+				* (point.z - cam.loc.position.z) + sin(cam.loc.rotation.y)
+				* (sin(cam.loc.rotation.z) * (point.y - cam.loc.position.y)
+				+ cos(cam.loc.rotation.z) * (point.x - cam.loc.position.x)))
+				+ cos(cam.loc.rotation.x) * (cos(cam.loc.rotation.z)
+				* (point.y - cam.loc.position.y) - sin(cam.loc.rotation.z)
+				* (point.x - cam.loc.position.x)));
 	new_point.z = (float)(cos(cam.loc.rotation.x) * (cos(cam.loc.rotation.y)
-	* (point.z - cam.loc.position.z) + sin(cam.loc.rotation.y)
-	* (sin(cam.loc.rotation.z) * (point.y - cam.loc.position.y)
-	+ cos(cam.loc.rotation.z) * (point.x - cam.loc.position.x)))
-	- sin(cam.loc.rotation.x) * (cos(cam.loc.rotation.z)
-	* (point.y - cam.loc.position.y) - sin(cam.loc.rotation.z)
-	* (point.x - cam.loc.position.x)));
+				* (point.z - cam.loc.position.z) + sin(cam.loc.rotation.y)
+				* (sin(cam.loc.rotation.z) * (point.y - cam.loc.position.y)
+				+ cos(cam.loc.rotation.z) * (point.x - cam.loc.position.x)))
+				- sin(cam.loc.rotation.x) * (cos(cam.loc.rotation.z)
+				* (point.y - cam.loc.position.y) - sin(cam.loc.rotation.z)
+				* (point.x - cam.loc.position.x)));
 	return (new_point);
 }
 

@@ -14,9 +14,8 @@
 # define LIBGRAPHICS_H
 
 # include <math.h>
-# include "../libft/libft.h"
-# include "../minilibx/mlx.h"
-# include <stdio.h> ///remove this shit
+# include "libft.h"
+# include "mlx.h"
 
 # define UP 126
 # define DOWN 125
@@ -134,7 +133,18 @@ typedef struct	s_renderer
 	void		(*render)(struct s_renderer *renderer, t_scene scene);
 }				t_renderer;
 
+typedef struct	s_line
+{
+	t_vec3fc	start;
+	t_vec2i		cur;
+	t_vec3fc	end;
+	t_vec2i		delta;
+	t_vec2i		dir;
+	double		slope;
+}				t_line;
+
 t_color			color(int color32);
+int				blend(int color_a, int color_b, float percentage);
 t_vec2i			*new_vec2i(int x, int y);
 t_vec2fc		*new_vec2f(float x, float y);
 t_vec3fc		*new_vec3f(float x, float y, float z);

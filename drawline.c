@@ -14,107 +14,86 @@
 #include <stdlib.h>
 #include "libgraphics.h"
 
-static int	extract_byte(int target, int bits_from_right)
+static t_line	c_line(t_vec3fc point_a, t_vec3fc point_b)
 {
-	return ((target & (255 << bits_from_right)) >> bits_from_right);
-}
-
-t_color		color(int color32)
-{
-	t_color	str_color;
-
-	str_color.red = extract_byte(color32, RED);
-	str_color.green = extract_byte(color32, GREEN);
-	str_color.blue = extract_byte(color32, BLUE);
-	str_color.alpha = extract_byte(color32, ALPHA);
-	return (str_color);
-}
-
-int			blend(int color_a, int color_b, float percentage)
-{
-	t_color	str_color1;
-	t_color	str_color2;
-	t_color	delta;
-	int		blend;
-
-	blend = 0;
-	str_color1 = color(color_a);
-	str_color2 = color(color_b);
-	if (color_a == color_b || percentage < 0.000001)
-		return (color_a);
-	delta.red = abs((str_color2.red - str_color1.red));
-	delta.green = abs((str_color2.green - str_color1.green));
-	delta.blue = abs((str_color2.blue - str_color1.blue));
-	if (color_a < color_b)
-		blend = (((int)(str_color1.red + (delta.red * percentage))) << 16)
-				| (((int)(str_color1.green + (delta.green * percentage))) << 8)
-				| ((int)(str_color1.blue + (delta.blue * percentage)));
-	else if (color_a > color_b)
-		blend = (((int)(str_color1.red - (delta.red * percentage))) << 16)
-				| (((int)(str_color1.green - (delta.green * percentage))) << 8)
-				| ((int)(str_color1.blue - (delta.blue * percentage)));
-	return (blend);
-}
-
-void		drawline(t_renderer *renderer, t_vec3fc point_a, t_vec3fc point_b)
-{
-	int			deltax;
-	int			deltay;
-	double		slope;
-	double		error;
-	double		deltaerr;
-	int			xdir;
-	int			ydir;
-	int			x;
-	int			y;
-	t_vec3fc	start;
-	t_vec3fc	end;
+	t_line line;
 
 	if (point_a.x > point_b.x)
 	{
-		start = point_a;
-		end = point_b;
+		line.start = point_a;
+		line.end = point_b;
 	}
 	else
 	{
-		start = point_b;
-		end = point_a;
+		line.start = point_b;
+		line.end = point_a;
 	}
-	deltax = (int)end.x - (int)start.x;
-	deltay = (int)end.y - (int)start.y;
-	slope = (deltax == 0) ? 0 : (double)deltay / (double)deltax;
+	line.delta.x = (int)line.end.x - (int)line.start.x;
+	line.delta.y = (int)line.end.y - (int)line.start.y;
+	line.slope = (line.delta.x == 0)
+						? 0 : (double)line.delta.y / (double)line.delta.x;
+	line.cur.x = (int)line.start.x;
+	line.cur.y = (int)line.start.y;
+	line.dir.x = (line.delta.x < 0) ? -1 : 1;
+	line.dir.y = (line.delta.y < 0) ? -1 : 1;
+	return (line);
+}
+
+static void		drawline_xmajor(t_renderer *renderer, t_line line)
+{
+	double	deltaerr;
+	double	error;
+
 	error = -1.0;
-	deltaerr = fabs(slope);
-	x = (int)start.x;
-	y = (int)start.y;
-	xdir = (deltax < 0) ? -1 : 1;
-	ydir = (deltay < 0) ? -1 : 1;
-	while ((fabs(slope) > 1.0 || deltax == 0) && y != (int)end.y)
+	deltaerr = fabs((double)line.delta.x / (double)line.delta.y);
+	while (line.cur.y != (int)line.end.y)
 	{
-		deltaerr = fabs((double)deltax / (double)deltay);
-		if (y == start.y)
+		if (line.cur.y == line.start.y)
 			error += deltaerr;
-		frame_pixel_put(renderer->scene, vec2fc(x, y, blend(start.color,
-						end.color, (fabsf((float)y - start.y)) / abs(deltay))));
+		frame_pixel_put(renderer->scene, vec2fc(line.cur.x, line.cur.y,
+			blend(line.start.color, line.end.color,
+			(fabsf((float)line.cur.y - line.start.y)) / abs(line.delta.y))));
 		error += deltaerr;
 		if (error >= 0.0)
 		{
-			x += xdir;
+			line.cur.x += line.dir.x;
 			error -= 1.0;
 		}
-		y += ydir;
+		line.cur.y += line.dir.y;
 	}
+}
+
+static void		drawline_ymajor(t_renderer *renderer, t_line line)
+{
+	double	deltaerr;
+	double	error;
+
+	error = -1.0;
+	deltaerr = fabs(line.slope);
 	error += deltaerr;
-	while (fabs(slope) <= 1.0 && x != (int)end.x)
+	while (line.cur.x != (int)line.end.x)
 	{
-		frame_pixel_put(renderer->scene, vec2fc(x, y, blend(start.color,
-						end.color, (fabsf((float)x - start.x)) / abs(deltax))));
+		frame_pixel_put(renderer->scene, vec2fc(line.cur.x, line.cur.y,
+			blend(line.start.color, line.end.color,
+			(fabsf((float)line.cur.x - line.start.x)) / abs(line.delta.x))));
 		error += deltaerr;
 		if (error >= 0.0)
 		{
-			y += ydir;
+			line.cur.y += line.dir.y;
 			error -= 1.0;
 		}
-		x += xdir;
+		line.cur.x += line.dir.x;
 	}
+}
+
+void			drawline(t_renderer *renderer, t_vec3fc point_a,
+												t_vec3fc point_b)
+{
+	t_line line;
+
+	line = c_line(point_a, point_b);
+	if ((fabs(line.slope) > 1.0 || line.delta.x == 0))
+		drawline_xmajor(renderer, line);
+	else if (fabs(line.slope) <= 1.0)
+		drawline_ymajor(renderer, line);
 }
