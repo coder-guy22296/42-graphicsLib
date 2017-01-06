@@ -13,7 +13,6 @@
 #include <math.h>
 #include <stdlib.h>
 #include "libgraphics.h"
-#include <stdio.h> // REMOVE
 
 static int	extract_byte(int target, int bits_from_right)
 {
@@ -59,21 +58,17 @@ int			blend(int color_a, int color_b, float percentage)
 
 void		drawline(t_renderer *renderer, t_vec3fc point_a, t_vec3fc point_b)
 {
-	int		deltax;
-	int		deltay;
-	double	slope;
-	double	error;
-	double	deltaerr;
-	int		xdir;
-	int		ydir;
-	int		x;
-	int		y;
-	t_vec3fc start;
-	t_vec3fc end;
-
-
-
-	//ft_putstr("line drawn!");
+	int			deltax;
+	int			deltay;
+	double		slope;
+	double		error;
+	double		deltaerr;
+	int			xdir;
+	int			ydir;
+	int			x;
+	int			y;
+	t_vec3fc	start;
+	t_vec3fc	end;
 
 	if (point_a.x > point_b.x)
 	{
@@ -85,7 +80,6 @@ void		drawline(t_renderer *renderer, t_vec3fc point_a, t_vec3fc point_b)
 		start = point_b;
 		end = point_a;
 	}
-
 	deltax = (int)end.x - (int)start.x;
 	deltay = (int)end.y - (int)start.y;
 	if (deltax == 0)
@@ -102,17 +96,14 @@ void		drawline(t_renderer *renderer, t_vec3fc point_a, t_vec3fc point_b)
 		xdir = -1;
 	if (deltay < 0)
 		ydir = -1;
-	while ((fabs(slope) > 1.0 || deltax == 0) && y != (int)end.y/* + ydir*/)
+	while ((fabs(slope) > 1.0 || deltax == 0) && y != (int)end.y)
 	{
 		deltaerr = fabs((double)deltax / (double)deltay);
 		if (y == start.y)
-		{
-
 			error += deltaerr;
-		}
-		frame_pixel_put(renderer->scene, vec2fc(x, y, blend(start.color, end.color, (fabsf((float)y - start.y))/abs(deltay))));
+		frame_pixel_put(renderer->scene, vec2fc(x, y, blend(start.color,
+						end.color, (fabsf((float)y - start.y)) / abs(deltay))));
 		error += deltaerr;
-		//printf("error: %f\n", error);
 		if (error >= 0.0)
 		{
 			x += xdir;
@@ -120,15 +111,11 @@ void		drawline(t_renderer *renderer, t_vec3fc point_a, t_vec3fc point_b)
 		}
 		y += ydir;
 	}
-
-	/*
-	**
-	*/
-
 	error += deltaerr;
-	while (fabs(slope) <= 1.0 && x != (int)end.x/* + xdir*/)
+	while (fabs(slope) <= 1.0 && x != (int)end.x)
 	{
-		frame_pixel_put(renderer->scene, vec2fc(x, y, blend(start.color, end.color, (fabsf((float)x - start.x))/abs(deltax))));
+		frame_pixel_put(renderer->scene, vec2fc(x, y, blend(start.color,
+						end.color, (fabsf((float)x - start.x)) / abs(deltax))));
 		error += deltaerr;
 		if (error >= 0.0)
 		{
