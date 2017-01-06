@@ -42,6 +42,19 @@
 #define NUM_DOT 65
 #define ESC 53
 
+#define ALPHA 24
+#define RED 16
+#define GREEN 8
+#define BLUE 0
+
+typedef struct	s_color
+{
+	int			red;
+	int			green;
+	int			blue;
+	int			alpha;
+}				t_color;
+
 typedef struct	s_vec2i
 {
 	int			x;
@@ -122,6 +135,7 @@ typedef struct	s_renderer
 	void		(*render)(struct s_renderer *renderer, t_scene scene);
 }				t_renderer;
 
+t_color			color(int color32);
 t_vec2i			*new_vec2i(int x, int y);
 t_vec2fc		*new_vec2f(float x, float y);
 t_vec3fc		*new_vec3f(float x, float y, float z);

@@ -15,26 +15,12 @@
 #include "libgraphics.h"
 #include <stdio.h> // REMOVE
 
-#define ALPHA 24
-#define RED 16
-#define GREEN 8
-#define BLUE 0
-
-
-typedef struct	s_color
-{
-	int			red;
-	int			green;
-	int			blue;
-	int			alpha;
-}				t_color;
-
-int	extract_byte(int target, int bits_from_right)
+static int	extract_byte(int target, int bits_from_right)
 {
 	return ((target & (255 << bits_from_right)) >> bits_from_right);
 }
 
-t_color	color(int color32)
+t_color		color(int color32)
 {
 	t_color str_color;
 	
@@ -45,7 +31,7 @@ t_color	color(int color32)
 	return (str_color);
 }
 
-int		blend(int color_a, int color_b, float percentage)
+int			blend(int color_a, int color_b, float percentage)
 {
 	t_color	str_color1;
 	t_color	str_color2;
@@ -71,7 +57,7 @@ int		blend(int color_a, int color_b, float percentage)
 	return (blend);
 }
 
-void	drawline(t_renderer *renderer, t_vec3fc point_a, t_vec3fc point_b)
+void		drawline(t_renderer *renderer, t_vec3fc point_a, t_vec3fc point_b)
 {
 	int		deltax;
 	int		deltay;
@@ -125,7 +111,6 @@ void	drawline(t_renderer *renderer, t_vec3fc point_a, t_vec3fc point_b)
 			error += deltaerr;
 		}
 		frame_pixel_put(renderer->scene, vec2fc(x, y, blend(start.color, end.color, (fabsf((float)y - start.y))/abs(deltay))));
-		//mlx_pixel_put(renderer.mlx, renderer.window, x, y, blend(start.color, end.color, abs(deltay), (int)start.y, y))/*(point_a.z < point_b.z) ? point_a.color : point_b.color)*/;
 		error += deltaerr;
 		//printf("error: %f\n", error);
 		if (error >= 0.0)
@@ -144,7 +129,6 @@ void	drawline(t_renderer *renderer, t_vec3fc point_a, t_vec3fc point_b)
 	while (fabs(slope) <= 1.0 && x != (int)end.x/* + xdir*/)
 	{
 		frame_pixel_put(renderer->scene, vec2fc(x, y, blend(start.color, end.color, (fabsf((float)x - start.x))/abs(deltax))));
-		//mlx_pixel_put(renderer.mlx, renderer.window, x, y, blend(start.color, end.color, abs(deltax), (int)start.x, x))/*(point_a.z < point_b.z) ? point_a.color : point_b.color)*/;
 		error += deltaerr;
 		if (error >= 0.0)
 		{
