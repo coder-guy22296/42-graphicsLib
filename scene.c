@@ -12,7 +12,7 @@
 
 #include "libgraphics.h"
 
-t_scene	*new_scene(t_vec3fc (*projection)(t_scene scene, t_vec3fc point),
+t_scene	*new_scene(struct s_vec3fc (*projection)(t_scene scene, t_vec3fc point),
 					int frame_height, int frame_width)
 {
 	t_scene *scene3d;
@@ -26,8 +26,8 @@ t_scene	*new_scene(t_vec3fc (*projection)(t_scene scene, t_vec3fc point),
 	return (scene3d);
 }
 
-t_scene	scene(t_vec3fc (*projection)(t_scene scene, t_vec3fc point),
-				 int frame_height, int frame_width)
+t_scene	scene(struct s_vec3fc (*projection)(t_scene scene, t_vec3fc point),
+					int frame_height, int frame_width)
 {
 	t_scene scene3d;
 
