@@ -14,10 +14,10 @@
 
 void	render3d_object(t_renderer *renderer, t_3d_object obj)
 {
-	int		cur_face;
-	int		cur_vertex;
-	int		*face_vertices;
-	int		next_vertex;
+	int			cur_face;
+	int			cur_vertex;
+	int			*face_vertices;
+	int			next_vertex;
 	t_vec3fc	vert1;
 	t_vec3fc	vert2;
 
@@ -36,7 +36,6 @@ void	render3d_object(t_renderer *renderer, t_3d_object obj)
 									obj.pos_vector.position);
 			vert2 = translate_point(obj.vertices[face_vertices[next_vertex]],
 									obj.pos_vector.position);
-			//if (cur_vertex % 7)
 			drawline3d(renderer, vert1, vert2);
 			cur_vertex++;
 		}

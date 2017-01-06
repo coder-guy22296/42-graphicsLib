@@ -50,7 +50,7 @@ t_vec3fc		orthographic_projection(t_scene scene, t_vec3fc point)
 	point.z += scene.origin_point.z;
 	new_point = camera_transform(cam, point);
 	if (new_point.z > 0)
-		return (vec3fc(0,0,0,0x4F000000));
+		return (vec3fc(0, 0, 0, 0x4F000000));
 	projection.x = scene.scale.x * new_point.x + 500;
 	projection.y = scene.scale.y * new_point.y + 500;
 	projection.z = new_point.z;

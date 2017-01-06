@@ -22,8 +22,8 @@ static int	extract_byte(int target, int bits_from_right)
 
 t_color		color(int color32)
 {
-	t_color str_color;
-	
+	t_color	str_color;
+
 	str_color.red = extract_byte(color32, RED);
 	str_color.green = extract_byte(color32, GREEN);
 	str_color.blue = extract_byte(color32, BLUE);
@@ -36,8 +36,8 @@ int			blend(int color_a, int color_b, float percentage)
 	t_color	str_color1;
 	t_color	str_color2;
 	t_color	delta;
-	int 	blend;
-	
+	int		blend;
+
 	blend = 0;
 	str_color1 = color(color_a);
 	str_color2 = color(color_b);
@@ -47,12 +47,12 @@ int			blend(int color_a, int color_b, float percentage)
 	delta.green = abs((str_color2.green - str_color1.green));
 	delta.blue = abs((str_color2.blue - str_color1.blue));
 	if (color_a < color_b)
-		blend = (((int)(str_color1.red + (delta.red * percentage)))<<16)
-				| (((int)(str_color1.green + (delta.green * percentage)))<<8)
+		blend = (((int)(str_color1.red + (delta.red * percentage))) << 16)
+				| (((int)(str_color1.green + (delta.green * percentage))) << 8)
 				| ((int)(str_color1.blue + (delta.blue * percentage)));
 	else if (color_a > color_b)
-		blend = (((int)(str_color1.red - (delta.red * percentage)))<<16)
-				| (((int)(str_color1.green - (delta.green * percentage)))<<8)
+		blend = (((int)(str_color1.red - (delta.red * percentage))) << 16)
+				| (((int)(str_color1.green - (delta.green * percentage))) << 8)
 				| ((int)(str_color1.blue - (delta.blue * percentage)));
 	return (blend);
 }
