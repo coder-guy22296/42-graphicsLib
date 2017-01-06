@@ -17,32 +17,30 @@ static t_vec3fc	camera_transform(t_camera cam, t_vec3fc point)
 	t_vec3fc new_point;
 
 	new_point.x = (float)(cos(cam.loc.rotation.y) * (sin(cam.loc.rotation.z)
-													 * (point.y - cam.loc.position.y) + cos(cam.loc.rotation.z)
-																						* (point.x - cam.loc.position.x)) - sin(cam.loc.rotation.y)
-																															* (point.z - cam.loc.position.z));
+				* (point.y - cam.loc.position.y) + cos(cam.loc.rotation.z)
+				* (point.x - cam.loc.position.x)) - sin(cam.loc.rotation.y)
+				* (point.z - cam.loc.position.z));
 	new_point.y = (float)(sin(cam.loc.rotation.x) * (cos(cam.loc.rotation.y)
-													 * (point.z - cam.loc.position.z) + sin(cam.loc.rotation.y)
-																						* (sin(cam.loc.rotation.z) * (point.y - cam.loc.position.y)
-																						   + cos(cam.loc.rotation.z) * (point.x - cam.loc.position.x)))
-						  + cos(cam.loc.rotation.x) * (cos(cam.loc.rotation.z)
-													   * (point.y - cam.loc.position.y) - sin(cam.loc.rotation.z)
-																						  * (point.x - cam.loc.position.x)));
+				* (point.z - cam.loc.position.z) + sin(cam.loc.rotation.y)
+				* (sin(cam.loc.rotation.z) * (point.y - cam.loc.position.y)
+				+ cos(cam.loc.rotation.z) * (point.x - cam.loc.position.x)))
+				+ cos(cam.loc.rotation.x) * (cos(cam.loc.rotation.z)
+				* (point.y - cam.loc.position.y) - sin(cam.loc.rotation.z)
+				* (point.x - cam.loc.position.x)));
 	new_point.z = (float)(cos(cam.loc.rotation.x) * (cos(cam.loc.rotation.y)
-													 * (point.z - cam.loc.position.z) + sin(cam.loc.rotation.y)
-																						* (sin(cam.loc.rotation.z) * (point.y - cam.loc.position.y)
-																						   + cos(cam.loc.rotation.z) * (point.x - cam.loc.position.x)))
-						  - sin(cam.loc.rotation.x) * (cos(cam.loc.rotation.z)
-													   * (point.y - cam.loc.position.y) - sin(cam.loc.rotation.z)
-																						  * (point.x - cam.loc.position.x)));
+				* (point.z - cam.loc.position.z) + sin(cam.loc.rotation.y)
+				* (sin(cam.loc.rotation.z) * (point.y - cam.loc.position.y)
+				+ cos(cam.loc.rotation.z) * (point.x - cam.loc.position.x)))
+				- sin(cam.loc.rotation.x) * (cos(cam.loc.rotation.z)
+				* (point.y - cam.loc.position.y) - sin(cam.loc.rotation.z)
+				* (point.x - cam.loc.position.x)));
 	return (new_point);
 }
 
-t_vec3fc	orthographic_projection(t_scene scene, t_vec3fc point)
+t_vec3fc		orthographic_projection(t_scene scene, t_vec3fc point)
 {
-	t_vec3fc		new_point;
-	t_vec3fc		projection;
-	//t_vec2fc		normalized_points;
-	//t_vec3fc		rasterized_points;
+	t_vec3fc	new_point;
+	t_vec3fc	projection;
 	t_camera	cam;
 
 	cam = *(scene.camera);
@@ -53,13 +51,9 @@ t_vec3fc	orthographic_projection(t_scene scene, t_vec3fc point)
 	new_point = camera_transform(cam, point);
 	if (new_point.z > 0)
 		return (vec3fc(0,0,0,0x4F000000));
-
 	projection.x = scene.scale.x * new_point.x + 500;
 	projection.y = scene.scale.y * new_point.y + 500;
-	//normalized_points.x = projection.x / 2;
-	//normalized_points.y = projection.y / 2;
-	//rasterized_points.x = (int)(projection.x * 1000);
-	//rasterized_points.y = (int)(projection.y * 1000);
-	//rasterized_points.z = new_point.z;
-    return (projection);
+	projection.z = new_point.z;
+	projection.color = point.color;
+	return (projection);
 }
