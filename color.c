@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libgraphics.h"
+#include "stdlib.h"
 
 static int	extract_byte(int target, int bits_from_right)
 {

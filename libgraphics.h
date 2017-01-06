@@ -21,6 +21,8 @@
 # define DOWN 125
 # define LEFT 123
 # define RIGHT 124
+# define PAGE_UP 116
+# define PAGE_DOWN 121
 
 # define NUM_7 89
 # define NUM_9 92
@@ -28,6 +30,7 @@
 # define NUM_5 87
 # define NUM_4 86
 # define NUM_6 88
+# define NUM_1 83
 
 # define W 13
 # define S 1
@@ -116,6 +119,7 @@ typedef struct	s_scene
 	t_vec3fc	origin_point;
 	t_camera	*camera;
 	t_list		*objects;
+	int			active_obj;
 	t_frame		cur_frame;
 	t_vec3fc	scale;
 	t_vec3fc	(*projection_method)(struct s_scene scene, t_vec3fc point);
