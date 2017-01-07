@@ -24,7 +24,8 @@ void	drawline3d(t_renderer *renderer, t_vec3fc point_a, t_vec3fc point_b)
 		|| point2.y < 0 - renderer->win_y * 0.25
 		|| point2.y > renderer->win_y * 1.25
 		|| point1.color == 0x4F000000 || point2.color == 0x4F000000
-		|| (int)point_a.z == -2147483648 || (int)point_b.z == -2147483648))
+		|| (int)point_a.z == -2147483648 || (int)point_b.z == -2147483648
+		|| (int)point1.z == -2147483648 || (int)point2.z == -2147483648))
 	{
 		drawline(renderer, point1, point2);
 	}
