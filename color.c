@@ -36,7 +36,6 @@ int			blend(int color_a, int color_b, float percentage)
 	t_color	delta;
 	int		blend;
 
-	blend = 0;
 	str_color1 = color(color_a);
 	str_color2 = color(color_b);
 	if (color_a == color_b || percentage < 0.000001)
@@ -44,13 +43,8 @@ int			blend(int color_a, int color_b, float percentage)
 	delta.red = (str_color2.red - str_color1.red);
 	delta.green = (str_color2.green - str_color1.green);
 	delta.blue = (str_color2.blue - str_color1.blue);
-	//if (color_a < color_b)
-		blend = (((int)(str_color1.red + (delta.red * percentage))) << 16)
-				| (((int)(str_color1.green + (delta.green * percentage))) << 8)
-				| ((int)(str_color1.blue + (delta.blue * percentage)));
-	//else if (color_a > color_b)
-	//	blend = (((int)(str_color1.red - (delta.red * percentage))) << 16)
-	//			| (((int)(str_color1.green - (delta.green * percentage))) << 8)
-	//			| ((int)(str_color1.blue - (delta.blue * percentage)));
+	blend = (((int)(str_color1.red + (delta.red * percentage))) << 16)
+			| (((int)(str_color1.green + (delta.green * percentage))) << 8)
+			| ((int)(str_color1.blue + (delta.blue * percentage)));
 	return (blend);
 }
