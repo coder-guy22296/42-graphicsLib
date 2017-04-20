@@ -6,7 +6,7 @@
 /*   By: cyildiri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 19:50:03 by cyildiri          #+#    #+#             */
-/*   Updated: 2017/04/19 21:03:24 by cyildiri         ###   ########.fr       */
+/*   Updated: 2017/04/20 00:37:17 by cyildiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void    point_map_render(t_renderer *renderer, t_3d_object obj)
     {
         vert1 = translate_point(obj.vertices[cur_vertex],
                                 obj.pos_vector.position);
-		point = orthographic_projection(renderer->scene, vert1);
+		point = orthographic_projection(*renderer->scene, vert1);
 		projection.x = point.x;
 		projection.y = point.y;
     	projection.color = point.color;

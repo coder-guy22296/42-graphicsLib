@@ -6,7 +6,7 @@
 #    By: cyildiri <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/10/02 13:05:49 by cyildiri          #+#    #+#              #
-#    Updated: 2016/10/02 13:05:49 by cyildiri         ###   ########.fr        #
+#    Updated: 2017/04/20 00:32:25 by cyildiri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,10 @@ SRC =   add_object.c\
 		vec2i.c\
 		vec3f.c\
 		vec6f.c\
-
+		new_point_map.c\
+		point_map_add_point.c\
+		point_map_render.c\
+		scene_render_point_map.c
 OFILES = $(SRC:.c=.o)
 
 #   Edit path to library
