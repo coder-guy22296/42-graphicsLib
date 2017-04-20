@@ -6,7 +6,7 @@
 /*   By: cyildiri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/21 15:59:14 by cyildiri          #+#    #+#             */
-/*   Updated: 2017/04/19 21:10:12 by cyildiri         ###   ########.fr       */
+/*   Updated: 2017/04/19 21:45:55 by cyildiri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,6 @@ t_3d_object		*new_point_map(int max_vertices);
 void			point_map_add_point(t_3d_object *point_map, t_vec3fc point);
 void			render_point_map(t_renderer *renderer, t_3d_object point_map);
 void			render_point_map_scene(t_renderer *renderer, t_scene scene);
-void			point_map_add_point(t_point_map *point_map, t_vec3fc point);
 t_frame			new_frame(int height, int width);
 void			add_window(t_renderer *renderer, int width, int height,
 							char *title);
